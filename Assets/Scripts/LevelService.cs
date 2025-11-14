@@ -9,7 +9,6 @@ public class LevelService : MonoBehaviour
 {
     public static LevelService Instance { get; private set; }
 
-    public Action<HexCell, HexCell> OnMatchingStacks;
     public Action OnStackSpawned;
     public Action<Vector2Int, int> OnItemsBurned;
     public Action<Vector2Int> OnCellUnlocked;
@@ -79,38 +78,6 @@ public class LevelService : MonoBehaviour
         {
             OnMergePossible?.Invoke(cell);
         }
-    }
-    
-    
-    /// <summary>
-    /// Вызывается, когда в ячейку положили новый стек.
-    /// </summary>
-    public void OnStackMovedToCell(HexStack hexStack, Vector2Int targetCellPosition)
-    {
-        Debug.LogError($"{GeneratedStacks.IndexOf(hexStack)} {targetCellPosition}");
-        
-        if (!Cells.TryGetValue(targetCellPosition, out var targetCell))
-        {
-            Debug.LogError($"{targetCellPosition} is not a valid cell");
-            return;
-        }
-        
-        GeneratedStacks.Remove(hexStack);
-        if (GeneratedStacks.Count == 0)
-        {
-            GenerateRandomStacks();
-        }
-        
-        targetCell.Stack = hexStack;
-
-        var matchCell = TryFindHexToMerge(targetCell);
-        if (matchCell == null)
-        {
-            return;
-        }
-        
-        Debug.LogError($"Merge {targetCell.GridPosition} {matchCell.GridPosition}");
-        OnMatchingStacks?.Invoke(matchCell, targetCell);
     }
 
     public HexCell TryFindHexToMerge(HexCell targetHexCell)
@@ -229,14 +196,24 @@ public class LevelService : MonoBehaviour
 
     public bool TryMoveItem(HexCell sourceHexCell, HexCell targetHexCell)
     {
-        if (sourceHexCell.Stack.Items.Count > 0 &&
-            sourceHexCell.Stack.Items.Last().ColorId == targetHexCell.Stack?.Items.Last().ColorId)
+        if (CanMoveItem(sourceHexCell, targetHexCell))
         {
             var stackItem = sourceHexCell.Stack.Pop();
             targetHexCell.Stack.Add(stackItem);
             
             ChangedCells.Add(targetHexCell.GridPosition);
             
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public bool CanMoveItem(HexCell sourceHexCell, HexCell targetHexCell)
+    {
+        if (sourceHexCell.Stack.Items.Count > 0 &&
+            sourceHexCell.Stack.Items.Last().ColorId == targetHexCell.Stack?.Items.Last().ColorId)
+        {
             return true;
         }
         

@@ -24,20 +24,16 @@ public class HexGridGenerator : MonoBehaviour
         var level = LevelService.Instance.Load();
         Generate(level.Values.ToList());
 
-        LevelService.Instance.OnMatchingStacks += MergeStacks;
         LevelService.Instance.OnMergePossible += MergeStacks;
         LevelService.Instance.OnItemsBurned += BurnItems;
         LevelService.Instance.OnCellUnlocked += UnlockCell;
-        
-        
     }
-
-
-
 
     private void OnDestroy()
     {
-        LevelService.Instance.OnMatchingStacks -= MergeStacks;
+        LevelService.Instance.OnMergePossible -= MergeStacks;
+        LevelService.Instance.OnItemsBurned -= BurnItems;
+        LevelService.Instance.OnCellUnlocked -= UnlockCell;
     }
 
     public void Generate(List<HexCell> cells)
@@ -78,67 +74,30 @@ public class HexGridGenerator : MonoBehaviour
     {
         foreach (var hexCell in targetHexCells)
         {
-            if (LevelService.Instance.TryMoveItem(hexCell, sourceHexCell))
+            if (LevelService.Instance.CanMoveItem(hexCell, sourceHexCell))
             {
-                // Здесь await теперь работает, потому что Merge возвращает UniTask
-                await MergeStacksAsync2(hexCell, sourceHexCell); 
+                await MergeStacksAsync(hexCell, sourceHexCell); 
             }
+        }
+        
+        var s = TryFindCellsToMerge(sourceHexCell); 
+        if (!s)
+        {
+            Debug.LogError($"Try Burn");
+            LevelService.Instance.TryBurn();
         }
     }
     
     // Изменили UniTaskVoid на UniTask, чтобы метод можно было ожидать (await)
-    private async UniTask MergeStacksAsync2(HexCell sourceHexCell, HexCell targetHexCell)
-    {
-        bool success = LevelService.Instance.TryMoveItem(sourceHexCell, targetHexCell);
-        if (!success)
-        {
-            var s = TryFindCellsToMerge(sourceHexCell); 
-            if (!s)
-            {
-                Debug.LogError($"Try Burn");
-                LevelService.Instance.TryBurn();
-            }
-            // завершение рекурсии
-            return; // Возвращаем завершенный UniTask
-        }
-
-        // ... (логика анимации и перемещения)
-
-        // задержка 0.5 сек (250 мс)
-        await UniTask.Delay(250);
-
-        // рекурсивный вызов с await для последовательности
-        await MergeStacksAsync2(sourceHexCell, targetHexCell);
-    }
-    
-    private void MergeStacks(HexCell sourceHexCell, HexCell targetHexCell)
-    {
-        // запустить рекурсивный процесс
-        MergeStacksAsync(sourceHexCell, targetHexCell).Forget();
-    }
-    
-    
     private async UniTask MergeStacksAsync(HexCell sourceHexCell, HexCell targetHexCell)
     {
-        // Пытаемся переместить следующий предмет из source в target
         bool success = LevelService.Instance.TryMoveItem(sourceHexCell, targetHexCell);
-    
         if (!success)
         {
-            // Не удалось переместить (стек source пуст или условие не выполнено)
-            var s = TryFindCellsToMerge(sourceHexCell); 
-            if (!s)
-            {
-                Debug.LogError($"Try Burn");
-                LevelService.Instance.TryBurn();
-            }
-            // Завершение рекурсии
-            return; 
+            return;
         }
 
-        // Успешный мердж → проигрываем анимацию
-
-        // Получаем представления стеков (предположительно, они кэшированы в Cells)
+        // Получаем представления стеков
         var sourceStackView = Cells[sourceHexCell.GridPosition].Stack;
         var targetStackView = Cells[targetHexCell.GridPosition].Stack;
 
@@ -148,7 +107,7 @@ public class HexGridGenerator : MonoBehaviour
         // Определяем, куда он должен приземлиться в target
         var targetItemPosition = targetStackView.NextItemPosition();
     
-        // Добавляем 3D-объект в список targetStackView (это важно для логики)
+        // Добавляем 3D-объект в список targetStackView
         targetStackView.items.Add(stackItem3D); 
 
         // Привязываем объект к targetStackView
@@ -157,59 +116,12 @@ public class HexGridGenerator : MonoBehaviour
         // Запускаем и ожидаем завершение анимации
         mover.PlayMoveAnimation(stackItem3D.transform, targetItemPosition);
 
-        // задержка 0.25 сек перед следующим рекурсивным вызовом
+        // задержка 0.5 сек (250 мс)
         await UniTask.Delay(250);
 
-        // Рекурсивный вызов с await для последовательного выполнения
+        // рекурсивный вызов с await для последовательности
         await MergeStacksAsync(sourceHexCell, targetHexCell);
     }
-    
-    
-    
-
-    // private async UniTaskVoid MergeStacksAsync(HexCell sourceHexCell, HexCell targetHexCell)
-    // {
-    //     bool success = LevelService.Instance.TryMoveItem(sourceHexCell, targetHexCell);
-    //     if (!success)
-    //     {
-    //         var s = TryFindCellsToMerge(sourceHexCell); ////////////
-    //
-    //         if (!s)
-    //         {
-    //             Debug.LogError($"Try Burn");
-    //             LevelService.Instance.TryBurn();
-    //         }
-    //         // завершение рекурсии
-    //         return;
-    //     }
-    //
-    //     // успешный мердж → проигрываем анимацию
-    //     var sourceStackView = Cells[sourceHexCell.GridPosition].Stack;
-    //     var targetStackView = Cells[targetHexCell.GridPosition].Stack;
-    //
-    //     var stackItem3D = sourceStackView.Pop();
-    //
-    //     var targetItemPosition = targetStackView.NextItemPosition();
-    //     Debug.LogError(targetItemPosition);
-    //     
-    //     targetStackView.items.Add(stackItem3D);
-    //
-    //     stackItem3D.transform.SetParent(targetStackView.transform);
-    //     mover.PlayMoveAnimation(stackItem3D.transform, targetItemPosition);
-    //
-    //     // mover.MoveItem(
-    //     //     stackItem3D.transform,
-    //     //     stackItem3D.transform,
-    //     //     targetItemPosition,
-    //     //     Vector3.one);
-    //
-    //
-    //     // задержка 0.5 сек
-    //     await UniTask.Delay(250);
-    //
-    //     // рекурсивный вызов
-    //     MergeStacksAsync(sourceHexCell, targetHexCell);
-    // }
 
     private bool TryFindCellsToMerge(HexCell sourceHexCell)
     {
