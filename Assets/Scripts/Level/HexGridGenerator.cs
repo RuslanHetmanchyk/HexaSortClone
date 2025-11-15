@@ -24,19 +24,17 @@ public class HexGridGenerator : MonoBehaviour
         var level = LevelService.Instance.Load();
         Generate(level.Values.ToList());
 
-        LevelService.Instance.OnMergePossible += MergeStacks;
-        LevelService.Instance.OnItemsBurned += BurnItems;
+        LevelService.Instance.OnMergePossible += ProcessMerge;
         LevelService.Instance.OnCellUnlocked += UnlockCell;
     }
 
     private void OnDestroy()
     {
-        LevelService.Instance.OnMergePossible -= MergeStacks;
-        LevelService.Instance.OnItemsBurned -= BurnItems;
+        LevelService.Instance.OnMergePossible -= ProcessMerge;
         LevelService.Instance.OnCellUnlocked -= UnlockCell;
     }
 
-    public void Generate(List<HexCell> cells)
+    private void Generate(List<HexCell> cells)
     {
         // cleanup previous children
         for (int i = transform.childCount - 1; i >= 0; i--)
@@ -61,87 +59,80 @@ public class HexGridGenerator : MonoBehaviour
         }
     }
     
-    private void MergeStacks(HexCell sourceHexCell)
+    private void UnlockCell(Vector2Int obj)
     {
-        var hexesToMerge = LevelService.Instance.TryFindHexesToMerge(sourceHexCell);
-        if (hexesToMerge?.Count > 0)
+        Cells[obj].Unlock();
+    }
+
+
+    private void ProcessMerge(HexCell cell)
+    {
+        ProcessMergeAsync(cell);
+    }
+
+    private async UniTask ProcessMergeAsync(HexCell cell)
+    {
+        if (cell.Stack?.Items.Count == 0)
         {
-            Merge(sourceHexCell, hexesToMerge);
+            return;
+        }
+        
+        // 1. Пытаемся переместить айтемы из соседей
+        //foreach (var neighbor in LevelService.Instance.GetNeighbors(cell))
+        var hexesToMerge = LevelService.Instance.TryFindHexesToMerge(cell);
+        if (hexesToMerge.Count > 0)
+        {
+            foreach (var neighbor in hexesToMerge)
+            {
+                await ProcessMergeAsync(cell, neighbor);
+            }
+            
+            foreach (var neighbor in hexesToMerge)
+            {
+                await ProcessMergeAsync(neighbor);
+            }
+        }
+
+        // 3. Если изменений не было → проверяем на сжигание
+        var countToRemove = LevelService.Instance.TryBurn(cell);
+        if (countToRemove > 0)
+        {
+            await BurnItemsAsync(cell.GridPosition, countToRemove);
+            await ProcessMergeAsync(cell);
         }
     }
 
-    private async UniTask Merge(HexCell sourceHexCell, List<HexCell> targetHexCells)
+    private async UniTask ProcessMergeAsync(HexCell toCell, HexCell fromCell)
     {
-        foreach (var hexCell in targetHexCells)
-        {
-            if (LevelService.Instance.CanMoveItem(hexCell, sourceHexCell))
-            {
-                await MergeStacksAsync(hexCell, sourceHexCell); 
-            }
-        }
-        
-        var s = TryFindCellsToMerge(sourceHexCell); 
-        if (!s)
-        {
-            Debug.LogError($"Try Burn");
-            LevelService.Instance.TryBurn();
-        }
-    }
-    
-    // Изменили UniTaskVoid на UniTask, чтобы метод можно было ожидать (await)
-    private async UniTask MergeStacksAsync(HexCell sourceHexCell, HexCell targetHexCell)
-    {
-        bool success = LevelService.Instance.TryMoveItem(sourceHexCell, targetHexCell);
+        bool success = LevelService.Instance.TryMoveItem(fromCell, toCell);
         if (!success)
         {
             return;
         }
-
+        
         // Получаем представления стеков
-        var sourceStackView = Cells[sourceHexCell.GridPosition].Stack;
-        var targetStackView = Cells[targetHexCell.GridPosition].Stack;
+        var cellStackView = Cells[toCell.GridPosition].Stack;
+        var neighborStackView = Cells[fromCell.GridPosition].Stack;
 
         // Извлекаем item 3D-объект, который только что был перемещен
-        var stackItem3D = sourceStackView.Pop();
+        var stackItem3D = neighborStackView.Pop();
 
         // Определяем, куда он должен приземлиться в target
-        var targetItemPosition = targetStackView.NextItemPosition();
+        var targetItemPosition = cellStackView.NextItemPosition();
     
-        // Добавляем 3D-объект в список targetStackView
-        targetStackView.items.Add(stackItem3D); 
+        // Добавляем 3D-объект в список cellStackView
+        cellStackView.items.Add(stackItem3D); 
 
-        // Привязываем объект к targetStackView
-        stackItem3D.transform.SetParent(targetStackView.transform);
-    
+        // Привязываем объект к cellStackView
+        stackItem3D.transform.SetParent(cellStackView.transform);
+            
         // Запускаем и ожидаем завершение анимации
-        mover.PlayMoveAnimation(stackItem3D.transform, targetItemPosition);
-
-        // задержка 0.5 сек (250 мс)
-        await UniTask.Delay(250);
-
-        // рекурсивный вызов с await для последовательности
-        await MergeStacksAsync(sourceHexCell, targetHexCell);
-    }
-
-    private bool TryFindCellsToMerge(HexCell sourceHexCell)
-    {
-        var targetHexCell = LevelService.Instance.TryFindHexToMerge(sourceHexCell);
-        if (targetHexCell != null)
-        {
-            MergeStacksAsync(sourceHexCell, targetHexCell).Forget();
-            return true;
-        }
+        await mover.PlayMoveAnimation(stackItem3D.transform, targetItemPosition);
         
-        return false;
-    }
-
-    private void BurnItems(Vector2Int gridPosition, int amount)
-    {
-        Debug.LogError($"Burn {amount} {gridPosition}");
-        BurnItemsAsync(gridPosition, amount).Forget();
+        await ProcessMergeAsync(toCell, fromCell);
     }
     
-    private async UniTaskVoid BurnItemsAsync(Vector2Int gridPosition, int amount)
+    private async UniTask BurnItemsAsync(Vector2Int gridPosition, int amount)
     {
         await UniTask.Delay(250);
         
@@ -156,11 +147,5 @@ public class HexGridGenerator : MonoBehaviour
             // 4. Ждем 0.1 секунды (асинхронно, без блокировки)
             await UniTask.Delay(100);
         }
-    }
-    
-    
-    private void UnlockCell(Vector2Int obj)
-    {
-        Cells[obj].Unlock();
     }
 }

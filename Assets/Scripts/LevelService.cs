@@ -68,6 +68,9 @@ public class LevelService : MonoBehaviour
         var targetHexCell = Cells[cellPosition];
         targetHexCell.Stack = hexStack;
         
+        AddToChangedCells(cellPosition);
+        AddToIncreasedStacks(cellPosition);
+        
         CheckMergePossibility(targetHexCell);
     }
 
@@ -88,6 +91,11 @@ public class LevelService : MonoBehaviour
     
     public List<HexCell> TryFindHexesToMerge(HexCell targetHexCell)
     {
+        if (targetHexCell.Stack?.Items?.Count == 0)
+        {
+            return new List<HexCell>();
+        }
+
         var neighbors = GetNotEmptyNeighbors(targetHexCell.GridPosition);
         return neighbors.FindAll(c => c.Stack != null && 
                                       c.Stack.Items.Count > 0 && // Хотя это должно быть гарантировано GetNotEmptyNeighbors
@@ -191,17 +199,49 @@ public class LevelService : MonoBehaviour
 
         return items;
     }
-    
-    public List<Vector2Int> ChangedCells = new List<Vector2Int>();
+
+    // ячейки в которые айтемы перемещались. Для ослеживания сжигания
+    public List<Vector2Int> IncreasedStacks = new ();
+    public void AddToIncreasedStacks(Vector2Int gridPosition)
+    {
+        var index = IncreasedStacks.IndexOf(gridPosition); 
+        if (index != -1)
+        {
+            IncreasedStacks.RemoveAt(index);
+        }
+
+        IncreasedStacks.Add(gridPosition);
+        
+        //Debug.LogError($"IncreasedStacks add {gridPosition}");
+    }
+
+    // ячейки у которых изменились верхние айтемы. Для отслеживания возможности мержа
+    public List<Vector2Int> ChangedCells = new ();
+
+    public void AddToChangedCells(Vector2Int gridPosition)
+    {
+        var index = ChangedCells.IndexOf(gridPosition); 
+        if (index != -1)
+        {
+            ChangedCells.RemoveAt(index);
+        }
+
+        ChangedCells.Add(gridPosition);
+        
+        //Debug.LogError($"ChangedCells add {gridPosition}");
+
+    }
 
     public bool TryMoveItem(HexCell sourceHexCell, HexCell targetHexCell)
     {
         if (CanMoveItem(sourceHexCell, targetHexCell))
         {
             var stackItem = sourceHexCell.Stack.Pop();
-            targetHexCell.Stack.Add(stackItem);
+            AddToChangedCells(sourceHexCell.GridPosition);
             
-            ChangedCells.Add(targetHexCell.GridPosition);
+            targetHexCell.Stack.Add(stackItem);
+            AddToChangedCells(targetHexCell.GridPosition);
+            AddToIncreasedStacks(targetHexCell.GridPosition);
             
             return true;
         }
@@ -220,17 +260,17 @@ public class LevelService : MonoBehaviour
         return false;
     }
 
-    public void TryBurn()
+    public bool TryBurn()
     {
         if (ChangedCells.Count == 0)
         {
-            return;
+            return false;
         }
 
         var items = Cells[ChangedCells.Last()].Stack.Items;
         
         if (items == null || items.Count == 0)
-            return;
+            return false;
 
         // Берём цвет верхнего (последнего) элемента
         int topColor = items.Last().ColorId;
@@ -255,6 +295,45 @@ public class LevelService : MonoBehaviour
             
             OnItemsBurned?.Invoke(Cells[ChangedCells.Last()].GridPosition, countToRemove);
         }
+        
+        return true;
+    }
+    
+    public int TryBurn(HexCell hexCell)
+    {
+        var items = hexCell.Stack.Items;
+
+        if (items == null || items.Count == 0)
+        {
+            return 0;
+        }
+
+        // Берём цвет верхнего (последнего) элемента
+        int topColor = items.Last().ColorId;
+        int countToRemove = 0;
+
+        // Считаем, сколько подряд с конца имеют тот же цвет
+        for (int i = items.Count - 1; i >= 0; i--)
+        {
+            if (items[i].ColorId == topColor)
+            {
+                countToRemove++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        // Удаляем найденное количество элементов
+        if (countToRemove >= 8)
+        {
+            items.RemoveRange(items.Count - countToRemove, countToRemove);
+            
+            IncreaseLevelScore(countToRemove);
+        }
+        
+        return countToRemove;
     }
     
     

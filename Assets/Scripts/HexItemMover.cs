@@ -204,14 +204,19 @@ public class HexItemMover : MonoBehaviour
         // });
     }
 
-    public void PlayMoveAnimation(Transform hexTransform, Vector3 targetPos)
+    public async UniTask PlayMoveAnimation(Transform hexTransform, Vector3 targetPos)
     {
-        hexTransform.DOLocalMove(targetPos, 0.25f)
-            .SetEase(Ease.OutQuad) // Применяет выбранный тип сглаживания
-            .OnComplete(() => // Вызывает действие по завершении анимации (опционально)
+        var tcs = new UniTaskCompletionSource();
+
+        hexTransform
+            .DOLocalMove(targetPos, 0.25f)
+            .SetEase(Ease.OutQuad)
+            .OnComplete(() =>
             {
-                Debug.Log("Объект завершил перемещение в " + targetPos);
+                tcs.TrySetResult();
             });
+
+        await tcs.Task;
     }
 
 public void DestroyAnimation(Transform hexTransform)
