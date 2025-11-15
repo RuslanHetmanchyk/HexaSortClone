@@ -10,7 +10,6 @@ public class LevelService : MonoBehaviour
     public static LevelService Instance { get; private set; }
 
     public Action OnStackSpawned;
-    public Action<Vector2Int, int> OnItemsBurned;
     public Action<Vector2Int> OnCellUnlocked;
     public Action OnScoreChanged;
     public Action OnLevelGoalReached;
@@ -68,9 +67,6 @@ public class LevelService : MonoBehaviour
         var targetHexCell = Cells[cellPosition];
         targetHexCell.Stack = hexStack;
         
-        AddToChangedCells(cellPosition);
-        AddToIncreasedStacks(cellPosition);
-        
         CheckMergePossibility(targetHexCell);
     }
 
@@ -81,12 +77,6 @@ public class LevelService : MonoBehaviour
         {
             OnMergePossible?.Invoke(cell);
         }
-    }
-
-    public HexCell TryFindHexToMerge(HexCell targetHexCell)
-    {
-        var neighbors = GetNotEmptyNeighbors(targetHexCell.GridPosition);
-        return neighbors.FirstOrDefault(c => targetHexCell.Stack.Items.Count > 0 && c.Stack.Items.Last().ColorId == targetHexCell.Stack.Items.Last().ColorId);
     }
     
     public List<HexCell> TryFindHexesToMerge(HexCell targetHexCell)
@@ -200,48 +190,12 @@ public class LevelService : MonoBehaviour
         return items;
     }
 
-    // ячейки в которые айтемы перемещались. Для ослеживания сжигания
-    public List<Vector2Int> IncreasedStacks = new ();
-    public void AddToIncreasedStacks(Vector2Int gridPosition)
-    {
-        var index = IncreasedStacks.IndexOf(gridPosition); 
-        if (index != -1)
-        {
-            IncreasedStacks.RemoveAt(index);
-        }
-
-        IncreasedStacks.Add(gridPosition);
-        
-        //Debug.LogError($"IncreasedStacks add {gridPosition}");
-    }
-
-    // ячейки у которых изменились верхние айтемы. Для отслеживания возможности мержа
-    public List<Vector2Int> ChangedCells = new ();
-
-    public void AddToChangedCells(Vector2Int gridPosition)
-    {
-        var index = ChangedCells.IndexOf(gridPosition); 
-        if (index != -1)
-        {
-            ChangedCells.RemoveAt(index);
-        }
-
-        ChangedCells.Add(gridPosition);
-        
-        //Debug.LogError($"ChangedCells add {gridPosition}");
-
-    }
-
     public bool TryMoveItem(HexCell sourceHexCell, HexCell targetHexCell)
     {
         if (CanMoveItem(sourceHexCell, targetHexCell))
         {
             var stackItem = sourceHexCell.Stack.Pop();
-            AddToChangedCells(sourceHexCell.GridPosition);
-            
             targetHexCell.Stack.Add(stackItem);
-            AddToChangedCells(targetHexCell.GridPosition);
-            AddToIncreasedStacks(targetHexCell.GridPosition);
             
             return true;
         }
@@ -258,45 +212,6 @@ public class LevelService : MonoBehaviour
         }
         
         return false;
-    }
-
-    public bool TryBurn()
-    {
-        if (ChangedCells.Count == 0)
-        {
-            return false;
-        }
-
-        var items = Cells[ChangedCells.Last()].Stack.Items;
-        
-        if (items == null || items.Count == 0)
-            return false;
-
-        // Берём цвет верхнего (последнего) элемента
-        int topColor = items.Last().ColorId;
-        int countToRemove = 0;
-
-        // Считаем, сколько подряд с конца имеют тот же цвет
-        for (int i = items.Count - 1; i >= 0; i--)
-        {
-            if (items[i].ColorId == topColor)
-                countToRemove++;
-            else
-                break;
-        }
-
-        // Удаляем найденное количество элементов
-        if (countToRemove >= 8)
-        {
-            items.RemoveRange(items.Count - countToRemove, countToRemove);
-            Debug.Log($"Removed {countToRemove} items of color {topColor}");
-            
-            IncreaseLevelScore(countToRemove);
-            
-            OnItemsBurned?.Invoke(Cells[ChangedCells.Last()].GridPosition, countToRemove);
-        }
-        
-        return true;
     }
     
     public int TryBurn(HexCell hexCell)

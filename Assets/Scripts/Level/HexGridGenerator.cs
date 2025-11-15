@@ -78,7 +78,6 @@ public class HexGridGenerator : MonoBehaviour
         }
         
         // 1. Пытаемся переместить айтемы из соседей
-        //foreach (var neighbor in LevelService.Instance.GetNeighbors(cell))
         var hexesToMerge = LevelService.Instance.TryFindHexesToMerge(cell);
         if (hexesToMerge.Count > 0)
         {
