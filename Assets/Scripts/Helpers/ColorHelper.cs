@@ -4,6 +4,9 @@ namespace Helpers
 {
     public static class ColorHelper
     {
+        // fixed palette
+        public static readonly string[] ColorNames = { "Red", "Green", "Blue", "Yellow", "Purple", "Cyan", "Orange" };
+
         // palette must match editor palette order
         public static readonly Color[] Palette = {
             new Color(0.85f,0.18f,0.18f), // Red

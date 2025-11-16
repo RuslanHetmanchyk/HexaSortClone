@@ -12,10 +12,10 @@ namespace Core.Services.Gameplay.Level.Interfaces
         event Action OnScoreChanged;
         event Action OnLevelGoalReached;
         event Action<HexCell> OnMergePossible;
-        
+
         Dictionary<Vector2Int, HexCell> Cells { get; }
         int LevelScore { get; }
-        
+
         List<HexStack> GeneratedStacks { get; }
 
         Dictionary<Vector2Int, HexCell> Load();

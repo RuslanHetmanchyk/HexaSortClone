@@ -1,3 +1,5 @@
+using Core.Helpers;
+using Helpers;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,28 +10,11 @@ public class HexLevelEditorWindow : EditorWindow
     private Vector2 leftScroll, rightScroll;
     private float cellDrawSize = 24f;
 
-    // fixed palette
-    private static readonly string[] colorNames = { "Red", "Green", "Blue", "Yellow", "Purple", "Cyan", "Orange" };
-    private static readonly Color[] colorValues = {
-        new Color(0.85f,0.18f,0.18f),
-        new Color(0.18f,0.70f,0.18f),
-        new Color(0.18f,0.45f,0.85f),
-        new Color(0.95f,0.85f,0.18f),
-        new Color(0.62f,0.18f,0.85f),
-        new Color(0.18f,0.80f,0.85f),
-        new Color(0.95f,0.58f,0.18f)
-    };
-
     [MenuItem("Tools/Hexa Sort Level Editor")]
     public static void OpenWindow()
     {
         var w = GetWindow<HexLevelEditorWindow>("Hex Level Editor");
         w.minSize = new Vector2(900, 450);
-    }
-
-    private void OnEnable()
-    {
-        // nothing for now
     }
 
     private void OnGUI()
@@ -193,14 +178,14 @@ private void DrawLeftPanel()
 
         // ◀ previous
         if (GUILayout.Button("◀", GUILayout.Width(28)))
-            colorIndex = (colorIndex - 1 + colorNames.Length) % colorNames.Length;
+            colorIndex = (colorIndex - 1 + ColorHelper.ColorNames.Length) % ColorHelper.ColorNames.Length;
 
         // dropdown
-        colorIndex = EditorGUILayout.Popup(colorIndex, colorNames);
+        colorIndex = EditorGUILayout.Popup(colorIndex, ColorHelper.ColorNames);
 
         // ▶ next
         if (GUILayout.Button("▶", GUILayout.Width(28)))
-            colorIndex = (colorIndex + 1) % colorNames.Length;
+            colorIndex = (colorIndex + 1) % ColorHelper.ColorNames.Length;
 
         // X delete
         if (GUILayout.Button("X", GUILayout.Width(22)))
@@ -212,7 +197,7 @@ private void DrawLeftPanel()
         }
 
         // preview
-        DrawColorRect(colorValues[colorIndex], 35, 18);
+        DrawColorRect(ColorHelper.Palette[colorIndex], 35, 18);
 
         cdata.items[realIndex] = colorIndex;
 
@@ -263,7 +248,7 @@ private void DrawLeftPanel()
             Vector2 pos = AxialToPixel(c.pos, center, cellDrawSize);
 
             // background: inactive = dim gray, active = cellColor
-            Color bg = c.active ? colorValues[c.cellColor] : (Color.gray * 0.35f);
+            Color bg = c.active ? ColorHelper.Palette[c.cellColor] : (Color.gray * 0.35f);
             Handles.color = bg;
             Handles.DrawSolidDisc(pos, Vector3.forward, cellDrawSize * 0.9f);
 
@@ -279,7 +264,7 @@ private void DrawLeftPanel()
                 {
                     Vector2 sqPos = pos + new Vector2(0, -cellDrawSize * 1.2f - si * 8);
                     Rect r = new Rect(sqPos.x - 8, sqPos.y - 6, 16, 12);
-                    EditorGUI.DrawRect(r, colorValues[c.items[Mathf.Max(0, c.items.Count - 1 - si)]]);
+                    EditorGUI.DrawRect(r, ColorHelper.Palette[c.items[Mathf.Max(0, c.items.Count - 1 - si)]]);
                 }
             }
 
@@ -327,7 +312,7 @@ private void DrawLeftPanel()
         // default activate center + radius 2
         foreach (var c in newLevel.cells)
         {
-            int dist = HexLevel.AxialDistance(c.pos, Vector2Int.zero);
+            int dist = HexHelper.AxialDistance(c.pos, Vector2Int.zero);
             c.active = dist <= 2;
         }
 
@@ -343,7 +328,7 @@ private void DrawLeftPanel()
         if (level == null) return;
         foreach (var c in level.cells)
         {
-            int dist = HexLevel.AxialDistance(c.pos, Vector2Int.zero);
+            int dist = HexHelper.AxialDistance(c.pos, Vector2Int.zero);
             c.active = dist <= 2;
         }
     }

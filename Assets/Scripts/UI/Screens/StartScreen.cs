@@ -13,7 +13,7 @@ namespace UI.Screens
     {
         [SerializeField] private Button buttonStart;
         [SerializeField] private TextMeshProUGUI buttonLabel;
-        
+
         private ICommandExecutionService commandExecutionService;
         private IUserService userService;
 
@@ -34,15 +34,16 @@ namespace UI.Screens
         public override void Show()
         {
             base.Show();
-            
+
             buttonLabel.text = $"Level {userService.Level}";
         }
 
         private void LoadNextLevel()
         {
-            Debug.LogError("START");
-            
-            LoadLevelData data = new LoadLevelData { SceneName = "LevelScene" };
+            var data = new LoadLevelData
+            {
+                SceneName = "LevelScene"
+            };
             commandExecutionService.Execute<LoadLevelCommand<LoadLevelData>, LoadLevelData>(data);
         }
     }

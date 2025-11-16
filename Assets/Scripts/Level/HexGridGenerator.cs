@@ -108,8 +108,6 @@ public class HexGridGenerator : MonoBehaviour
             await ProcessBurnHexItemsAsync(cell.GridPosition, countToRemove);
             await ProcessMergeAsync(cell);
         }
-        
-        Debug.LogError("END");
     }
 
     private async UniTask ProcessMergeHexItemAsync(HexCell toCell, HexCell fromCell)

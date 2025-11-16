@@ -17,9 +17,9 @@ namespace UI.Screens
     {
         [SerializeField] private TextMeshProUGUI labelScore;
         [SerializeField] private Button buttonClose;
-        
+
         [SerializeField] private Button buttonBuster1;
-        
+
         private ICommandExecutionService commandExecutionService;
         private ILevelService levelService;
         private IUserService userService;
@@ -57,7 +57,7 @@ namespace UI.Screens
         public override void Hide()
         {
             base.Hide();
-            
+
             levelService.OnScoreChanged -= UpdateScore;
         }
 
