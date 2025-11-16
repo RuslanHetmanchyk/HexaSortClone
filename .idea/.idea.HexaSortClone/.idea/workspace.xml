@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="abfe908f-d091-45b9-bcea-e04c855ef98b" name="Changes" comment="Refactoring" />
+    <list default="true" id="abfe908f-d091-45b9-bcea-e04c855ef98b" name="Changes" comment="gitignore" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -148,7 +148,7 @@
       <option name="presentableId" value="Default" />
       <updated>1763134112377</updated>
       <workItem from="1763134117035" duration="6934000" />
-      <workItem from="1763196159911" duration="41050000" />
+      <workItem from="1763196159911" duration="41421000" />
     </task>
     <task id="LOCAL-00001" summary="Add recorder">
       <option name="closed" value="true" />
@@ -222,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763327891517</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="gitignore">
+      <option name="closed" value="true" />
+      <created>1763328126052</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1763328126052</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,25 +251,7 @@
     <MESSAGE value="Refactoring Level service" />
     <MESSAGE value="Setup level configs" />
     <MESSAGE value="Refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Level/HexGridGenerator.cs</url>
-          <line>47</line>
-          <properties documentPath="C:\Disk D\Projects\HexaSortClone\Assets\Scripts\Level\HexGridGenerator.cs" containingFunctionPresentation="Method 'Install'">
-            <startOffsets>
-              <option value="1224" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1261" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
   </component>
 </project>

@@ -2,7 +2,7 @@
 using System.Linq;
 using Core.Services.CommandRunner.Interfaces;
 using Core.Services.Gameplay.Commands;
-using DefaultNamespace;
+using Core.Services.Gameplay.Level.Implementation;
 using UnityEngine;
 
 namespace Gameplay
@@ -121,10 +121,10 @@ namespace Gameplay
             }
         }
 
-        private void AddItem(StackItem stackItem)
+        private void AddItem(HexItem hexItem)
         {
             var it = Instantiate(itemPrefab, transform);
-            it.ApplyColorById(stackItem.ColorId);
+            it.ApplyColorById(hexItem.ColorId);
 
             // каждый следующий появляется выше предыдущего
             it.transform.localPosition = NextItemPosition();

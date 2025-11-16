@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace Core.Services.Gameplay.Level.Implementation
 {
     public class HexCell
     {

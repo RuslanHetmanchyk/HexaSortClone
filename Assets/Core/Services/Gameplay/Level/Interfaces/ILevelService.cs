@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DefaultNamespace;
+using Core.Services.Gameplay.Level.Implementation;
 using UnityEngine;
 
 namespace Core.Services.Gameplay.Level.Interfaces

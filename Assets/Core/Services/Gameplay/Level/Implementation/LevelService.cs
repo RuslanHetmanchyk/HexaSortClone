@@ -5,7 +5,6 @@ using Core.Config;
 using Core.Helpers;
 using Core.Services.Gameplay.Level.Interfaces;
 using Core.Services.User.Interfaces;
-using DefaultNamespace;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -47,7 +46,7 @@ namespace Core.Services.Gameplay.Level.Implementation
         {
             if (cellConfig.active)
             {
-                var items = cellConfig.items.Select(itemConfig => new StackItem(itemConfig)).ToList();
+                var items = cellConfig.items.Select(itemConfig => new HexItem(itemConfig)).ToList();
                 var hexStack = new HexStack(items);
                 
                 var hexCell = new HexCell(cellConfig.pos, hexStack);
@@ -133,7 +132,7 @@ namespace Core.Services.Gameplay.Level.Implementation
     }
     
 // предполагается, что есть конструктор: new StackItem(int colorId)
-    private List<StackItem> GenerateRandomItems()
+    private List<HexItem> GenerateRandomItems()
     {
         int itemCount = Random.Range(3, 7);   // 3..6
         int colorCount = Random.Range(1, 4);  // 1..3 distinct colors
@@ -166,13 +165,13 @@ namespace Core.Services.Gameplay.Level.Implementation
         if (Random.value > 0.5f)
             order = order.OrderBy(_ => Random.value).ToList();
 
-        List<StackItem> items = new List<StackItem>();
+        List<HexItem> items = new List<HexItem>();
         foreach (int idx in order)
         {
             int color = chosen[idx];
             int cnt = counts[idx];
             for (int k = 0; k < cnt; k++)
-                items.Add(new StackItem(color));
+                items.Add(new HexItem(color));
         }
 
         return items;
