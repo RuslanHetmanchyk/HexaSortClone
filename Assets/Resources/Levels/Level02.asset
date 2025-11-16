@@ -1,0 +1,239 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6769fd47a49658b44aaf144bf7629ccd, type: 3}
+  m_Name: Level02
+  m_EditorClassIdentifier: 
+  radius: 3
+  cells:
+  - pos: {x: -3, y: 0}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -3, y: 1}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -3, y: 2}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -3, y: 3}
+    active: 1
+    cellColor: 0
+    items: 0000000000000000000000000000000000000000
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -2, y: -1}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -2, y: 0}
+    active: 0
+    cellColor: 0
+    items: 000000000000000000000000
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -2, y: 1}
+    active: 1
+    cellColor: 0
+    items: 0000000000000000
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -2, y: 2}
+    active: 1
+    cellColor: 0
+    items: 02000000020000000200000002000000
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -2, y: 3}
+    active: 1
+    cellColor: 0
+    items: 010000000100000001000000010000000100000001000000
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -1, y: -2}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -1, y: -1}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 2
+    lockValue: 1
+  - pos: {x: -1, y: 0}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -1, y: 1}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -1, y: 2}
+    active: 1
+    cellColor: 0
+    items: 000000000000000000000000
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -1, y: 3}
+    active: 1
+    cellColor: 0
+    items: 020000000200000002000000020000000200000002000000
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 0, y: -3}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 0, y: -2}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 0, y: -1}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 0, y: 0}
+    active: 1
+    cellColor: 0
+    items: 00000000000000000000000000000000
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 0, y: 1}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 0, y: 2}
+    active: 1
+    cellColor: 0
+    items: 01000000010000000100000001000000
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 0, y: 3}
+    active: 1
+    cellColor: 0
+    items: 0000000000000000000000000000000000000000
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 1, y: -3}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 1, y: -2}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 2
+    lockValue: 20
+  - pos: {x: 1, y: -1}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 1, y: 0}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 1, y: 1}
+    active: 1
+    cellColor: 0
+    items: 0000000000000000
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 1, y: 2}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 2, y: -3}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 2, y: -2}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 2, y: -1}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 2
+    lockValue: 1
+  - pos: {x: 2, y: 0}
+    active: 0
+    cellColor: 0
+    items: 00000000000000000000000000000000
+    lockType: 0
+    lockValue: 1
+  - pos: {x: 2, y: 1}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 3, y: -3}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 3, y: -2}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 3, y: -1}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 3, y: 0}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  hexesToBurnGoal: 35

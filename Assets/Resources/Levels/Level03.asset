@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6769fd47a49658b44aaf144bf7629ccd, type: 3}
-  m_Name: Level01
+  m_Name: Level03
   m_EditorClassIdentifier: 
   radius: 2
   cells:
@@ -128,4 +128,4 @@ MonoBehaviour:
     items: 00000000000000000000000000000000
     lockType: 0
     lockValue: 1
-  hexesToBurnGoal: 25
+  hexesToBurnGoal: 50
