@@ -1,18 +1,21 @@
 ﻿using Helpers;
 using UnityEngine;
 
-public class HexItemView : MonoBehaviour
+namespace Gameplay
 {
-    [SerializeField] private Renderer rend;
-    [SerializeField] private float height = 0.35f;
-
-    public float Height => height;
-
-    public void ApplyColorById(int idx)
+    public class HexItemView : MonoBehaviour
     {
-        if (rend.sharedMaterial != null)
+        [SerializeField] private Renderer rend;
+        [SerializeField] private float height = 0.35f;
+
+        public float Height => height;
+
+        public void ApplyColorById(int idx)
         {
-            rend.material.color = ColorHelper.Palette[idx];
+            if (rend.sharedMaterial != null)
+            {
+                rend.material.color = ColorHelper.Palette[idx];
+            }
         }
     }
 }

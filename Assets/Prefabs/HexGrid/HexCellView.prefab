@@ -492,7 +492,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b85afbe1ad4fc0b4392adeacbfbb747d, type: 2}
     - target: {fileID: 919132149155446097, guid: 6909375e224a3bc45b32d5f65f23866a, type: 3}
       propertyPath: m_Name
-      value: HexCell
+      value: HexCellView
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6909375e224a3bc45b32d5f65f23866a, type: 3}
       propertyPath: m_Layer
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4d0d297d9c4ed09827c96f013bf9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stackPrefab: {fileID: 4868886481957837442, guid: bc22e16041bee114ba563c8d96fdc745, type: 3}
+  hexStackPrefab: {fileID: 4868886481957837442, guid: bc22e16041bee114ba563c8d96fdc745, type: 3}
   lockView: {fileID: 8500567657460698212}
   active: 1
   stackAnchor: {fileID: 7710117058798354870}

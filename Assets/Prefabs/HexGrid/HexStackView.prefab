@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4868886481957837442}
   - component: {fileID: 9129106892260984062}
   m_Layer: 7
-  m_Name: Stack3DPrefab
+  m_Name: HexStackView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

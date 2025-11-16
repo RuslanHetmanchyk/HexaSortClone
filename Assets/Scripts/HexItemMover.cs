@@ -219,7 +219,7 @@ public class HexItemMover : MonoBehaviour
         await tcs.Task;
     }
 
-public void DestroyAnimation(Transform hexTransform)
+    public void DestroyAnimation(Transform hexTransform)
     {
         float scaleDuration = 0.25f;
         float jumpHeight = 0.5f; // Насколько высоко подлетит объект по Y
@@ -250,5 +250,7 @@ public void DestroyAnimation(Transform hexTransform)
         // .Join(tween) запускает этот Tween параллельно с предыдущим
         mySequence.Append(scaleTween) // Сначала добавляем уменьшение
             .Join(jumpTween); // Запускаем подскок одновременно с уменьшением
+        
+        mySequence.OnComplete(() => Destroy(hexTransform.gameObject));
     }
 }
