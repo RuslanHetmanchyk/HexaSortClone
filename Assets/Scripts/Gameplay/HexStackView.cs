@@ -69,12 +69,10 @@ namespace Gameplay
                     TryEndDrag(t.position);
             }
 
-            // если мы в режиме перетаскивания — обновляем позицию плавно
             if (dragging)
             {
                 Vector3 screenPos = GetCurrentPointerPosition();
 
-                // получаем цель в world (попытаемся raycast, иначе пересечение с плоскостью Y)
                 Ray ray = cam.ScreenPointToRay(screenPos);
                 Vector3 worldPoint;
                 if (Physics.Raycast(ray, out RaycastHit hit, 200f))
@@ -83,16 +81,14 @@ namespace Gameplay
                 }
                 else
                 {
-                    // fallback: пересечение с плоскостью на высоте текущего объекта
                     Plane plane = new Plane(Vector3.up, new Vector3(0f, transform.position.y, 0f));
                     if (plane.Raycast(ray, out float enter))
                         worldPoint = ray.GetPoint(enter);
                     else
-                        worldPoint = transform.position; // крайний случай — остаёмся на месте
+                        worldPoint = transform.position;
                 }
 
                 Vector3 desired = worldPoint + dragOffset;
-                // Оставляем текущую высоту Y (если нужно фиксировать y)
                 desired.y = transform.position.y;
 
                 // ускоренное догоняющее движение
@@ -105,19 +101,15 @@ namespace Gameplay
             }
         }
 
-// вспомогательные методы
         private void TryBeginDrag(Vector3 screenPosition)
         {
             Ray ray = cam.ScreenPointToRay(screenPosition);
-            //if (Physics.Raycast(ray, out RaycastHit hit, 200f, groundMask))
             if (Physics.Raycast(ray, out RaycastHit hit, 200f))
             {
                 if (hit.collider != null && hit.collider.gameObject == gameObject)
                 {
                     dragging = true;
-                    // dragOffset в world-координатах — сохраняем разницу между позицией объекта и точкой касания
                     dragOffset = transform.position - hit.point;
-                    // фиксируем вертикальную составляющую, если нужно (чтобы не дергался по Y)
                     dragOffset.y = 0f;
                 }
             }
@@ -128,7 +120,6 @@ namespace Gameplay
             if (dragging)
             {
                 dragging = false;
-                // здесь можно вызывать TryDrop() или другую логику окончания перетаскивания
                 TryDrop();
             }
         }
