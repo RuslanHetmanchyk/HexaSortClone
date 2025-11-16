@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a2abf02f46340febe02b792bc6b8877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stackPrefab: {fileID: 4868886481957837442, guid: bc22e16041bee114ba563c8d96fdc745, type: 3}
+  hexStackPrefab: {fileID: 4868886481957837442, guid: bc22e16041bee114ba563c8d96fdc745, type: 3}
   spawnLine: {fileID: 527141298}
   spacing: 2.2
 --- !u!1 &665575808
@@ -323,9 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 1174717554156973730, guid: bb29d55f2178916499141b0222a22ae8, type: 3}
-  itemPrefab: {fileID: 6416572139518623750, guid: cd0b2744bfbbaa44da761b10ee6f1fce, type: 3}
   cellSize: 1
-  itemHeightOffset: 0.375
   mover: {fileID: 665575812}
 --- !u!114 &665575812
 MonoBehaviour:
@@ -467,9 +465,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelName: Levels/Level01
-  LevelGoal: 0
-  ChangedCells: []
   LevelScore: 0
+  LevelGoal: 0
 --- !u!4 &938317627
 Transform:
   m_ObjectHideFlags: 0
