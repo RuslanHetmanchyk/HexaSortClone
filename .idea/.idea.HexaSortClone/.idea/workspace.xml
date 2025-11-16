@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="abfe908f-d091-45b9-bcea-e04c855ef98b" name="Changes" comment="Refactoring" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;RulaPRO&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/RuslanHetmanchyk/HexaSortClone.git&quot;,
+    &quot;accountId&quot;: &quot;82b84a20-0726-4d9c-8f98-ba5f3cad1481&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Config/ConfigAsset.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Resources/ProjectContext.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Commands/TryDropStackToHexCellCommand.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Interfaces/ILevelService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/LevelServiceInstaller.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scenes/LevelScene.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scenes/LevelScene.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexCell3D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexCellView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexItemView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/Stack3D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/StackSpawner.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/HexItemMover.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/HexItemMover.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/StackSpawner.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/StackSpawner.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/UI/Screens/GameplayScreen.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="35TVaThrkVRXXMy8LnIvZMLmRjE" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.12f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath &quot;C:\Disk D\Projects\HexaSortClone&quot; -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Disk D\Projects\HexaSortClone" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.12f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;C:\Disk D\Projects\HexaSortClone&quot; -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="C:\Disk D\Projects\HexaSortClone" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list />
+      </option>
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="9420">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" value="9420" />
+      <option name="projectPathOnTarget" />
+      <option name="runtimes">
+        <list>
+          <MonoRuntime />
+        </list>
+      </option>
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\eonki\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="abfe908f-d091-45b9-bcea-e04c855ef98b" name="Changes" comment="" />
+      <created>1763134112377</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1763134112377</updated>
+      <workItem from="1763134117035" duration="6934000" />
+      <workItem from="1763196159911" duration="41050000" />
+    </task>
+    <task id="LOCAL-00001" summary="Add recorder">
+      <option name="closed" value="true" />
+      <created>1763161213239</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1763161213239</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763161284513</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1763161284513</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Refactor merge process on view">
+      <option name="closed" value="true" />
+      <created>1763247140739</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1763247140739</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Refactoring Level service">
+      <option name="closed" value="true" />
+      <created>1763247786280</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1763247786280</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763288702079</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1763288702079</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763307942331</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1763307942331</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763308949609</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1763308949609</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Setup level configs">
+      <option name="closed" value="true" />
+      <created>1763309617628</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1763309617628</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763327891517</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1763327891517</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Add recorder" />
+    <MESSAGE value="Refactor merge process on view" />
+    <MESSAGE value="Refactoring Level service" />
+    <MESSAGE value="Setup level configs" />
+    <MESSAGE value="Refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Level/HexGridGenerator.cs</url>
+          <line>47</line>
+          <properties documentPath="C:\Disk D\Projects\HexaSortClone\Assets\Scripts\Level\HexGridGenerator.cs" containingFunctionPresentation="Method 'Install'">
+            <startOffsets>
+              <option value="1224" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1261" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
