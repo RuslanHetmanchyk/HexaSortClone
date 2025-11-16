@@ -39,38 +39,111 @@ namespace Gameplay
             }
         }
 
+        private Vector3 currentVelocity = Vector3.zero;
+        private float followSpeed = 15f;
+        private float smoothTime = 0.05f;
+
         void HandleDrag()
         {
+            // поддержка мыши (Editor/Standalone)
+#if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetMouseButtonDown(0))
             {
-                if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out var hit, 100f))
-                {
-                    if (hit.collider.gameObject == gameObject)
-                    {
-                        dragging = true;
-                        dragOffset = transform.position - hit.point;
-                    }
-                }
+                TryBeginDrag(Input.mousePosition);
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                if (dragging)
-                {
-                    TryDrop();
-                }
+                TryEndDrag(Input.mousePosition);
+            }
+#endif
 
-                dragging = false;
+            // поддержка touch (мобильные)
+            if (Input.touchCount > 0)
+            {
+                Touch t = Input.GetTouch(0);
+
+                if (t.phase == TouchPhase.Began)
+                    TryBeginDrag(t.position);
+                else if (t.phase == TouchPhase.Ended || t.phase == TouchPhase.Canceled)
+                    TryEndDrag(t.position);
             }
 
+            // если мы в режиме перетаскивания — обновляем позицию плавно
             if (dragging)
             {
-                if (Physics.Raycast(cam.ScreenPointToRay(Input.mousePosition), out var hit, 100f))
+                Vector3 screenPos = GetCurrentPointerPosition();
+
+                // получаем цель в world (попытаемся raycast, иначе пересечение с плоскостью Y)
+                Ray ray = cam.ScreenPointToRay(screenPos);
+                Vector3 worldPoint;
+                if (Physics.Raycast(ray, out RaycastHit hit, 200f))
                 {
-                    Vector3 target = hit.point + dragOffset;
-                    transform.position = new Vector3(target.x, transform.position.y, target.z);
+                    worldPoint = hit.point;
+                }
+                else
+                {
+                    // fallback: пересечение с плоскостью на высоте текущего объекта
+                    Plane plane = new Plane(Vector3.up, new Vector3(0f, transform.position.y, 0f));
+                    if (plane.Raycast(ray, out float enter))
+                        worldPoint = ray.GetPoint(enter);
+                    else
+                        worldPoint = transform.position; // крайний случай — остаёмся на месте
+                }
+
+                Vector3 desired = worldPoint + dragOffset;
+                // Оставляем текущую высоту Y (если нужно фиксировать y)
+                desired.y = transform.position.y;
+
+                // ускоренное догоняющее движение
+                transform.position = Vector3.SmoothDamp(
+                    transform.position,
+                    desired,
+                    ref currentVelocity,
+                    smoothTime
+                );
+            }
+        }
+
+// вспомогательные методы
+        private void TryBeginDrag(Vector3 screenPosition)
+        {
+            Ray ray = cam.ScreenPointToRay(screenPosition);
+            //if (Physics.Raycast(ray, out RaycastHit hit, 200f, groundMask))
+            if (Physics.Raycast(ray, out RaycastHit hit, 200f))
+            {
+                if (hit.collider != null && hit.collider.gameObject == gameObject)
+                {
+                    dragging = true;
+                    // dragOffset в world-координатах — сохраняем разницу между позицией объекта и точкой касания
+                    dragOffset = transform.position - hit.point;
+                    // фиксируем вертикальную составляющую, если нужно (чтобы не дергался по Y)
+                    dragOffset.y = 0f;
                 }
             }
+        }
+
+        private void TryEndDrag(Vector3 screenPosition)
+        {
+            if (dragging)
+            {
+                dragging = false;
+                // здесь можно вызывать TryDrop() или другую логику окончания перетаскивания
+                TryDrop();
+            }
+        }
+
+        private Vector3 GetCurrentPointerPosition()
+        {
+#if UNITY_EDITOR || UNITY_STANDALONE
+            if (Input.mousePresent)
+                return Input.mousePosition;
+#endif
+
+            if (Input.touchCount > 0)
+                return Input.GetTouch(0).position;
+
+            return Input.mousePosition;
         }
 
         void TryDrop()
