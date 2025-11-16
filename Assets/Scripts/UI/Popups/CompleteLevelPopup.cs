@@ -10,13 +10,13 @@ namespace UI.Popups
     public class CompleteLevelPopup : UIPopup
     {
         [SerializeField] private Button buttonClose;
-        
-        private ICommandExecutionService commandExecutionService;
+
+        private ICommandExecutionService commandService;
 
         [Inject]
-        private void Install(ICommandExecutionService commandExecutionService)
+        private void Install(ICommandExecutionService commandService)
         {
-            this.commandExecutionService = commandExecutionService;
+            this.commandService = commandService;
         }
 
         private void Start()
@@ -24,8 +24,8 @@ namespace UI.Popups
             buttonClose.onClick.AddListener(() =>
             {
                 var data = new LoadLevelData { SceneName = "StartScene" };
-                commandExecutionService.Execute<LoadLevelCommand<LoadLevelData>, LoadLevelData>(data);
-                
+                commandService.Execute<LoadLevelCommand<LoadLevelData>, LoadLevelData>(data);
+
                 Hide();
             });
         }

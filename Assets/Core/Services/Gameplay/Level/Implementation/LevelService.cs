@@ -247,6 +247,7 @@ namespace Core.Services.Gameplay.Level.Implementation
 
         if (LevelScore >= LevelGoal)
         {
+            userService.Level = Math.Min(3, userService.Level + 1);
             OnLevelGoalReached?.Invoke();
         }
     }

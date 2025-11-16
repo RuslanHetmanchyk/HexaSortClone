@@ -12,21 +12,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6769fd47a49658b44aaf144bf7629ccd, type: 3}
   m_Name: Level03
   m_EditorClassIdentifier: 
-  radius: 2
+  radius: 3
   cells:
-  - pos: {x: -2, y: 0}
-    active: 1
+  - pos: {x: -3, y: 0}
+    active: 0
     cellColor: 0
-    items: 000000000000000000000000
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -3, y: 1}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -3, y: 2}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -3, y: 3}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -2, y: -1}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -2, y: 0}
+    active: 0
+    cellColor: 0
+    items: 
     lockType: 0
     lockValue: 0
   - pos: {x: -2, y: 1}
     active: 1
     cellColor: 0
-    items: 0400000004000000040000000400000004000000040000000400000004000000
+    items: 
     lockType: 0
     lockValue: 0
   - pos: {x: -2, y: 2}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -2, y: 3}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -1, y: -2}
     active: 0
     cellColor: 0
     items: 
@@ -36,7 +78,7 @@ MonoBehaviour:
     active: 1
     cellColor: 0
     items: 
-    lockType: 1
+    lockType: 0
     lockValue: 1
   - pos: {x: -1, y: 0}
     active: 1
@@ -47,10 +89,22 @@ MonoBehaviour:
   - pos: {x: -1, y: 1}
     active: 1
     cellColor: 0
-    items: 040000000400000003000000030000000300000003000000030000000300000003000000
+    items: 
     lockType: 0
     lockValue: 0
   - pos: {x: -1, y: 2}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: -1, y: 3}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 0, y: -3}
     active: 0
     cellColor: 0
     items: 
@@ -71,23 +125,35 @@ MonoBehaviour:
   - pos: {x: 0, y: 0}
     active: 1
     cellColor: 0
-    items: 00000000000000000000000000000000
+    items: 
     lockType: 0
     lockValue: 0
   - pos: {x: 0, y: 1}
     active: 1
     cellColor: 0
-    items: 03000000030000000300000002000000020000000200000002000000020000000200000002000000
+    items: 
     lockType: 0
     lockValue: 0
   - pos: {x: 0, y: 2}
+    active: 1
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 0, y: 3}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 1, y: -3}
     active: 0
     cellColor: 0
     items: 
     lockType: 0
     lockValue: 0
   - pos: {x: 1, y: -2}
-    active: 1
+    active: 0
     cellColor: 0
     items: 
     lockType: 2
@@ -107,7 +173,19 @@ MonoBehaviour:
   - pos: {x: 1, y: 1}
     active: 1
     cellColor: 0
-    items: 02000000020000000200000001000000010000000100000001000000010000000100000001000000
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 1, y: 2}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 2, y: -3}
+    active: 0
+    cellColor: 0
+    items: 
     lockType: 0
     lockValue: 0
   - pos: {x: 2, y: -2}
@@ -120,12 +198,42 @@ MonoBehaviour:
     active: 1
     cellColor: 0
     items: 
-    lockType: 1
-    lockValue: 1
-  - pos: {x: 2, y: 0}
-    active: 1
-    cellColor: 0
-    items: 00000000000000000000000000000000
     lockType: 0
     lockValue: 1
+  - pos: {x: 2, y: 0}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 1
+  - pos: {x: 2, y: 1}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 3, y: -3}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 3, y: -2}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 3, y: -1}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
+  - pos: {x: 3, y: 0}
+    active: 0
+    cellColor: 0
+    items: 
+    lockType: 0
+    lockValue: 0
   hexesToBurnGoal: 50

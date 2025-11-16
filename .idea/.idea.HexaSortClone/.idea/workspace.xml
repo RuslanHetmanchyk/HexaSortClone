@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="abfe908f-d091-45b9-bcea-e04c855ef98b" name="Changes" comment="gitignore" />
+    <list default="true" id="abfe908f-d091-45b9-bcea-e04c855ef98b" name="Changes" comment="Refactoring">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HexaSortClone/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HexaSortClone/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Core/Services/User/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Services/User/Interfaces/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Levels/Level03.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Levels/Level03.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Popups/CompleteLevelPopup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Popups/CompleteLevelPopup.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,8 +38,11 @@
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Config/ConfigAsset.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Resources/ProjectContext.prefab" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Commands/TryDropStackToHexCellCommand.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Commands/TryDropStackToHexCellCommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Interfaces/ILevelService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Interfaces/ILevelService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/LevelServiceInstaller.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
@@ -46,11 +55,14 @@
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scenes/LevelScene.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexCell3D.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexCellView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexCellView.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexItemView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexStackView.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/Stack3D.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/StackSpawner.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/HexItemMover.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/HexItemMover.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
@@ -148,7 +160,7 @@
       <option name="presentableId" value="Default" />
       <updated>1763134112377</updated>
       <workItem from="1763134117035" duration="6934000" />
-      <workItem from="1763196159911" duration="41421000" />
+      <workItem from="1763196159911" duration="43513000" />
     </task>
     <task id="LOCAL-00001" summary="Add recorder">
       <option name="closed" value="true" />
@@ -230,7 +242,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763328126052</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763329910896</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1763329910896</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,8 +270,8 @@
     <MESSAGE value="Refactor merge process on view" />
     <MESSAGE value="Refactoring Level service" />
     <MESSAGE value="Setup level configs" />
-    <MESSAGE value="Refactoring" />
     <MESSAGE value="gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="gitignore" />
+    <MESSAGE value="Refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
   </component>
 </project>
