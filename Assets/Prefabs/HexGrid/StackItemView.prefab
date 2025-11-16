@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: bbbb734ca3f3d7047b2b6275b882db9f, type: 2}
     - target: {fileID: 919132149155446097, guid: 6909375e224a3bc45b32d5f65f23866a, type: 3}
       propertyPath: m_Name
-      value: StackItem3D
+      value: StackItemView
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -89,9 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b288b6d3e14f9b9e78c3228104aefb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 5997898636935438758}
   height: 0.35
-  colors: []
+  rend: {fileID: 5997898636935438758}
 --- !u!23 &5997898636935438758 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 6909375e224a3bc45b32d5f65f23866a, type: 3}

@@ -7,8 +7,9 @@ using UnityEngine;
 
 public class Stack3D : MonoBehaviour
 {
-    [SerializeField] public StackItem3D itemPrefab;
+    [SerializeField] public HexItemView itemPrefab;
     [SerializeField] public Collider collider;
+    
     public Transform itemsRoot;
 
     public LayerMask hexCellLayer;
@@ -22,7 +23,7 @@ public class Stack3D : MonoBehaviour
     
     public HexStack HexStack;
 
-    public List<StackItem3D> items = new();
+    public List<HexItemView> items = new();
     
     public ICommandExecutionService commandService;
 
@@ -140,18 +141,18 @@ public class Stack3D : MonoBehaviour
     
     public Vector3 GetItemPositionByIndex(int index)
     {
-        return new Vector3(0, index * itemPrefab.height, 0);
+        return new Vector3(0, index * itemPrefab.Height, 0);
     }
     
-    public void Add(StackItem3D stackItem)
+    public void Add(HexItemView hexItemView)
     {
-        stackItem.transform.SetParent(itemsRoot);
-        stackItem.transform.localPosition = NextItemPosition();
+        hexItemView.transform.SetParent(itemsRoot);
+        hexItemView.transform.localPosition = NextItemPosition();
 
-        items.Add(stackItem);
+        items.Add(hexItemView);
     }
     
-    public StackItem3D Pop()
+    public HexItemView Pop()
     {
         var stackItem = items.Last();
             

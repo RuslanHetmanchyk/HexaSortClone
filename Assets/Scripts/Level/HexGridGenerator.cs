@@ -8,11 +8,9 @@ public class HexGridGenerator : MonoBehaviour
 {
     [Header("Prefabs")]
     public HexCell3D cellPrefab; // should have HexCell component
-    public StackItem3D itemPrefab; // should have HexItem component or renderer to color
 
     [Header("Layout")]
     public float cellSize = 1f;         // hex spacing
-    public float itemHeightOffset = 0.25f; // vertical offset between stacked items (Y)
     
     [Space(10)]
     public HexItemMover mover;
