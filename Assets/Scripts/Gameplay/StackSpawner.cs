@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Core.Services.CommandRunner.Interfaces;
+using Core.Services.Gameplay.Level.Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -15,36 +16,40 @@ namespace Gameplay
         private List<HexStackView> stacks = new();
 
         private ICommandExecutionService commandService;
+        private ILevelService levelService;
 
         [Inject]
-        private void Install(ICommandExecutionService commandService)
+        private void Install(
+            ICommandExecutionService commandService,
+            ILevelService levelService)
         {
             this.commandService = commandService;
+            this.levelService = levelService;
         }
 
         void Start()
         {
-            LevelService.Instance.OnStackSpawned += Spawn;
+            levelService.OnStackSpawned += Spawn;
 
-            LevelService.Instance.GenerateRandomStacks();
+            levelService.GenerateRandomStacks();
         }
 
         private void OnDestroy()
         {
-            LevelService.Instance.OnStackSpawned -= Spawn;
+            levelService.OnStackSpawned -= Spawn;
         }
 
         private void Spawn()
         {
             Clear();
 
-            for (int i = 0; i < LevelService.Instance.GeneratedStacks.Count; i++)
+            for (var i = 0; i < levelService.GeneratedStacks.Count; i++)
             {
                 var startPos = spawnLine.position + new Vector3(i * spacing - spacing, 0f, 0f);
                 var stack = Instantiate(hexStackPrefab, startPos, Quaternion.identity);
                 stack.SetStartPos(startPos);
                 stack.SetCommandRunner(commandService);
-                stack.Init(LevelService.Instance.GeneratedStacks[i]);
+                stack.Init(levelService.GeneratedStacks[i]);
                 stack.SetDraggableActive(true);
 
                 stacks.Add(stack);

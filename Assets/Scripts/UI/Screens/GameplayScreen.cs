@@ -1,5 +1,6 @@
 ﻿using Core.Config;
 using Core.Services.CommandRunner.Interfaces;
+using Core.Services.Gameplay.Level.Interfaces;
 using Core.Services.Scenes.Commands;
 using Core.Services.UI.Commands;
 using Core.Services.UI.Implementation.UIUnits;
@@ -19,19 +20,20 @@ namespace UI.Screens
         
         [SerializeField] private Button buttonBuster1;
         
-        
-        
         private ICommandExecutionService commandExecutionService;
+        private ILevelService levelService;
         private IUserService userService;
         private ConfigAsset configAsset;
 
         [Inject]
         private void Install(
             ICommandExecutionService commandExecutionService,
+            ILevelService levelService,
             IUserService userService,
             ConfigAsset configAsset)
         {
             this.commandExecutionService = commandExecutionService;
+            this.levelService = levelService;
             this.userService = userService;
             this.configAsset = configAsset;
         }
@@ -48,20 +50,20 @@ namespace UI.Screens
 
             UpdateScore();
 
-            LevelService.Instance.OnScoreChanged += UpdateScore;
-            LevelService.Instance.OnLevelGoalReached += CompleteLevel;
+            levelService.OnScoreChanged += UpdateScore;
+            levelService.OnLevelGoalReached += CompleteLevel;
         }
 
         public override void Hide()
         {
             base.Hide();
             
-            LevelService.Instance.OnScoreChanged -= UpdateScore;
+            levelService.OnScoreChanged -= UpdateScore;
         }
 
         private void UpdateScore()
         {
-            labelScore.text = $"{LevelService.Instance.LevelScore} / {configAsset.GetLevel(userService.Level).hexesToBurnGoal}";
+            labelScore.text = $"{levelService.LevelScore} / {configAsset.GetLevel(userService.Level).hexesToBurnGoal}";
         }
 
         private void CompleteLevel()
@@ -77,7 +79,7 @@ namespace UI.Screens
 
         private void UseBuster()
         {
-            LevelService.Instance.GenerateRandomStacks();
+            levelService.GenerateRandomStacks();
         }
     }
 }

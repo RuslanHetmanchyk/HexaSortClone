@@ -1,4 +1,6 @@
-﻿using DefaultNamespace;
+﻿using Core.Services.CommandRunner.Interfaces;
+using Core.Services.Gameplay.Commands;
+using DefaultNamespace;
 using UnityEngine;
 
 namespace Gameplay
@@ -8,13 +10,16 @@ namespace Gameplay
         [SerializeField] private HexStackView hexStackPrefab;
         [SerializeField] private HexCellLockView lockView;
 
-        public bool HasItems => LevelService.Instance.Cells[GridPos].Stack.Items.Count > 0;
+        public bool HasItems => HexStack?.Items?.Count > 0;
 
         public Vector2Int GridPos { get; set; }
-        public HexStackView HexStack { get; private set; }
+        public HexStack HexStack { get; private set; }
+        public HexStackView HexStackView { get; private set; }
 
         public LockType LockType { get; private set; }
         public int LockValue { get; private set; }
+        
+        private ICommandExecutionService commandService;
 
         private void OnMouseUpAsButton()
         {
@@ -23,14 +28,21 @@ namespace Gameplay
                 return;
             }
 
-            TryToUnlock();
+            TryToUnlockHexCell();
         }
 
         public void Init(HexStack stack)
         {
-            HexStack = Instantiate(hexStackPrefab, transform);
-            HexStack.Init(stack);
-            HexStack.SetDraggableActive(false);
+            HexStack = stack;
+            
+            HexStackView = Instantiate(hexStackPrefab, transform);
+            HexStackView.Init(stack);
+            HexStackView.SetDraggableActive(false);
+        }
+
+        public void Setup(ICommandExecutionService commandService)
+        {
+            this.commandService = commandService;
         }
 
         public bool CanAcceptStack()
@@ -40,7 +52,7 @@ namespace Gameplay
 
         public void PlaceStack(HexStackView hexStack)
         {
-            HexStack = hexStack;
+            HexStackView = hexStack;
 
             hexStack.transform.position = transform.position;
         }
@@ -64,9 +76,13 @@ namespace Gameplay
             lockView.DisableLock();
         }
 
-        private void TryToUnlock()
+        private void TryToUnlockHexCell()
         {
-            LevelService.Instance.TryUnlockCell(GridPos);
+            var data = new UnlockHexCellData
+            {
+                HexCellPosition = GridPos,
+            };
+            commandService.Execute<TryUnlockHexCellCommand, UnlockHexCellData>(data);
         }
     }
 }

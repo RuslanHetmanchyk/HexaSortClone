@@ -1,5 +1,5 @@
 ﻿using Core.Services.CommandRunner.Interfaces.Command;
-using Core.Services.UI.Interfaces;
+using Core.Services.Gameplay.Level.Interfaces;
 using DefaultNamespace;
 using UnityEngine;
 using Zenject;
@@ -8,25 +8,24 @@ namespace Core.Services.Gameplay.Commands
 {
     public class TryDropStackToHexCellCommand : ICommandWithData<StackDropData>
     {
-        private IUIService uiService;
+        private ILevelService levelService;
 
         [Inject]
-        public void Construct(IUIService uiService)
+        public void Construct(ILevelService levelService)
         {
-            this.uiService = uiService;
+            this.levelService = levelService;
         }
 
         public void Execute(StackDropData commandData)
         {
-            if (!LevelService.Instance.Cells.TryGetValue(commandData.TargetCellPosition, out var targetCell))
+            if (!levelService.Cells.TryGetValue(commandData.TargetCellPosition, out var targetCell))
             {
                 Debug.LogError($"{commandData.TargetCellPosition} is not a valid cell");
                 return;
             }
-        
-            LevelService.Instance.RemoveGeneratedStack(commandData.HexStack);
-            
-            LevelService.Instance.DropStackToCell(commandData.HexStack, commandData.TargetCellPosition);
+
+            levelService.RemoveGeneratedStack(commandData.HexStack);
+            levelService.DropStackToCell(commandData.HexStack, commandData.TargetCellPosition);
         }
     }
 

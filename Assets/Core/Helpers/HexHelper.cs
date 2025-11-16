@@ -1,9 +1,19 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace Core.Helpers
 {
     public static class HexHelper
     {
+        public static Vector2Int[] Directions =
+        {
+            new (+1, 0),   // East
+            new (+1, -1),  // NE
+            new (0, -1),   // NW
+            new (-1, 0),   // West
+            new (-1, +1),  // SW
+            new (0, +1)    // SE
+        };
+
         public static Vector3 AxialToWorld(Vector2Int hex, float size)
         {
             // pointy-top axial to world in XZ plane

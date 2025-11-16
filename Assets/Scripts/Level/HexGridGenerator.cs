@@ -1,9 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Core.Helpers;
+using Core.Services.CommandRunner.Interfaces;
+using Core.Services.Gameplay.Level.Interfaces;
 using Cysharp.Threading.Tasks;
 using DefaultNamespace;
 using Gameplay;
 using UnityEngine;
+using Zenject;
 
 public class HexGridGenerator : MonoBehaviour
 {
@@ -17,20 +21,32 @@ public class HexGridGenerator : MonoBehaviour
     [SerializeField] private HexItemMover mover;
 
     private readonly Dictionary<Vector2Int, HexCellView> cellViews = new();
+    
+    private ICommandExecutionService commandService;
+    private ILevelService levelService;
 
     private void Start()
     {
-        var level = LevelService.Instance.Load();
+        var level = levelService.Load();
         Generate(level.Values.ToList());
 
-        LevelService.Instance.OnMergePossible += ProcessMerge;
-        LevelService.Instance.OnCellUnlocked += UnlockCell;
+        levelService.OnMergePossible += ProcessMerge;
+        levelService.OnCellUnlocked += UnlockCell;
     }
 
     private void OnDestroy()
     {
-        LevelService.Instance.OnMergePossible -= ProcessMerge;
-        LevelService.Instance.OnCellUnlocked -= UnlockCell;
+        levelService.OnMergePossible -= ProcessMerge;
+        levelService.OnCellUnlocked -= UnlockCell;
+    }
+
+    [Inject]
+    private void Install(
+        ICommandExecutionService commandService,
+        ILevelService levelService)
+    {
+        this.commandService = commandService;
+        this.levelService = levelService;
     }
 
     private void Generate(List<HexCell> cells)
@@ -51,6 +67,7 @@ public class HexGridGenerator : MonoBehaviour
             if (hexCell.Stack.Items.Count > 0)
             {
                 hexCellView.Init(hexCell.Stack);
+                hexCellView.Setup(commandService);
             }
 
             hexCellView.Lock(hexCell.LockType, hexCell.LockValue);
@@ -71,7 +88,7 @@ public class HexGridGenerator : MonoBehaviour
             return;
         }
 
-        var hexesToMerge = LevelService.Instance.TryFindHexesToMerge(cell);
+        var hexesToMerge = levelService.TryFindHexesToMerge(cell);
         if (hexesToMerge.Count > 0)
         {
             foreach (var neighbor in hexesToMerge)
@@ -85,24 +102,26 @@ public class HexGridGenerator : MonoBehaviour
             }
         }
 
-        var countToRemove = LevelService.Instance.TryBurn(cell);
+        var countToRemove = levelService.TryBurn(cell);
         if (countToRemove > 0)
         {
             await ProcessBurnHexItemsAsync(cell.GridPosition, countToRemove);
             await ProcessMergeAsync(cell);
         }
+        
+        Debug.LogError("END");
     }
 
     private async UniTask ProcessMergeHexItemAsync(HexCell toCell, HexCell fromCell)
     {
-        var success = LevelService.Instance.TryMoveItem(fromCell, toCell);
+        var success = levelService.TryMoveItem(fromCell, toCell);
         if (!success)
         {
             return;
         }
 
-        var cellStackView = cellViews[toCell.GridPosition].HexStack;
-        var neighborStackView = cellViews[fromCell.GridPosition].HexStack;
+        var cellStackView = cellViews[toCell.GridPosition].HexStackView;
+        var neighborStackView = cellViews[fromCell.GridPosition].HexStackView;
 
         var targetHexItemPosition = cellStackView.NextItemPosition();
 
@@ -120,7 +139,7 @@ public class HexGridGenerator : MonoBehaviour
 
         for (var i = 0; i < amount; i++)
         {
-            var stackItem3D = cellViews[gridPosition].HexStack.Pop();
+            var stackItem3D = cellViews[gridPosition].HexStackView.Pop();
 
             mover.DestroyAnimation(stackItem3D.transform);
 
