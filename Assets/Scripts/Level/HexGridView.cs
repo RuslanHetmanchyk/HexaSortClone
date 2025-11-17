@@ -20,7 +20,7 @@ namespace Level
         [SerializeField] private float cellSize = 1f;
 
         [Space(10)]
-        [SerializeField] private HexItemMover mover;
+        [SerializeField] private HexGridAnimator animator;
 
         private readonly Dictionary<Vector2Int, HexCellView> cellViews = new();
     
@@ -128,7 +128,7 @@ namespace Level
             var hexItemView = neighborStackView.Pop();
             cellStackView.Push(hexItemView);
 
-            await mover.PlayMoveAnimation(hexItemView.transform, targetHexItemPosition);
+            await animator.PlayMoveAnimation(hexItemView.transform, targetHexItemPosition);
 
             await ProcessMergeHexItemAsync(toCell, fromCell);
         }
@@ -141,7 +141,7 @@ namespace Level
             {
                 var stackItem3D = cellViews[gridPosition].HexStackView.Pop();
 
-                mover.DestroyAnimation(stackItem3D.transform);
+                animator.DestroyAnimation(stackItem3D.transform);
 
                 await UniTask.Delay(100);
             }

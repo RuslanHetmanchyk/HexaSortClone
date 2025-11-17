@@ -324,7 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellPrefab: {fileID: 1174717554156973730, guid: bb29d55f2178916499141b0222a22ae8, type: 3}
   cellSize: 1
-  mover: {fileID: 665575812}
+  animator: {fileID: 665575812}
 --- !u!114 &665575812
 MonoBehaviour:
   m_ObjectHideFlags: 0
