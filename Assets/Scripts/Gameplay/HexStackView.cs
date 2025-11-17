@@ -40,9 +40,6 @@ namespace Gameplay
         }
 
         private Vector3 currentVelocity = Vector3.zero;
-        private float followSpeed = 15f;
-        private float smoothTime = 0.05f;
-
         void HandleDrag()
         {
             // поддержка мыши (Editor/Standalone)
@@ -61,34 +58,41 @@ namespace Gameplay
             // поддержка touch (мобильные)
             if (Input.touchCount > 0)
             {
-                Touch t = Input.GetTouch(0);
-
+                var t = Input.GetTouch(0);
                 if (t.phase == TouchPhase.Began)
+                {
                     TryBeginDrag(t.position);
+                }
                 else if (t.phase == TouchPhase.Ended || t.phase == TouchPhase.Canceled)
+                {
                     TryEndDrag(t.position);
+                }
             }
 
             if (dragging)
             {
                 Vector3 screenPos = GetCurrentPointerPosition();
 
-                Ray ray = cam.ScreenPointToRay(screenPos);
+                var ray = cam.ScreenPointToRay(screenPos);
                 Vector3 worldPoint;
-                if (Physics.Raycast(ray, out RaycastHit hit, 200f))
+                if (Physics.Raycast(ray, out RaycastHit hit, 200f, 8))
                 {
                     worldPoint = hit.point;
                 }
                 else
                 {
-                    Plane plane = new Plane(Vector3.up, new Vector3(0f, transform.position.y, 0f));
+                    var plane = new Plane(Vector3.up, new Vector3(0f, transform.position.y, 0f));
                     if (plane.Raycast(ray, out float enter))
+                    {
                         worldPoint = ray.GetPoint(enter);
+                    }
                     else
+                    {
                         worldPoint = transform.position;
+                    }
                 }
 
-                Vector3 desired = worldPoint + dragOffset;
+                var desired = worldPoint + dragOffset;
                 desired.y = transform.position.y;
 
                 // ускоренное догоняющее движение
@@ -96,14 +100,14 @@ namespace Gameplay
                     transform.position,
                     desired,
                     ref currentVelocity,
-                    smoothTime
+                    0.05f
                 );
             }
         }
 
         private void TryBeginDrag(Vector3 screenPosition)
         {
-            Ray ray = cam.ScreenPointToRay(screenPosition);
+            var ray = cam.ScreenPointToRay(screenPosition);
             if (Physics.Raycast(ray, out RaycastHit hit, 200f))
             {
                 if (hit.collider != null && hit.collider.gameObject == gameObject)
@@ -165,7 +169,7 @@ namespace Gameplay
 
         private void ResetPosition()
         {
-            transform.position = startPos;
+            transform.position = new Vector3(startPos.x, 5, startPos.z);
         }
 
 
