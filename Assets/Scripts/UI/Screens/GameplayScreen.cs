@@ -4,6 +4,7 @@ using Core.Services.Gameplay.Level.Interfaces;
 using Core.Services.Scenes.Commands;
 using Core.Services.UI.Commands;
 using Core.Services.UI.Implementation.UIUnits;
+using Core.Services.UI.Interfaces;
 using Core.Services.User.Interfaces;
 using TMPro;
 using UI.Popups;
@@ -22,6 +23,7 @@ namespace UI.Screens
 
         private ICommandExecutionService commandExecutionService;
         private ILevelService levelService;
+        private IUIService uiService;
         private IUserService userService;
         private ConfigAsset configAsset;
 
@@ -29,11 +31,13 @@ namespace UI.Screens
         private void Install(
             ICommandExecutionService commandExecutionService,
             ILevelService levelService,
+            IUIService uiService,
             IUserService userService,
             ConfigAsset configAsset)
         {
             this.commandExecutionService = commandExecutionService;
             this.levelService = levelService;
+            this.uiService = uiService;
             this.userService = userService;
             this.configAsset = configAsset;
         }
@@ -80,6 +84,10 @@ namespace UI.Screens
         private void UseBuster()
         {
             levelService.GenerateRandomStacks();
+
+            var notificationPopup = uiService.GetPopup<NotificationPopup>();
+            notificationPopup.SetLabel($"STACKS UPDATED");
+            notificationPopup.Show();
         }
     }
 }
