@@ -65,11 +65,11 @@ namespace Level
                 var world = HexHelper.AxialToWorld(hexCell.GridPosition, cellSize);
                 var hexCellView = Instantiate(cellPrefab, world, Quaternion.identity, transform);
                 hexCellView.GridPos = hexCell.GridPosition;
+                hexCellView.Setup(commandService);
 
                 if (hexCell.Stack.Items.Count > 0)
                 {
                     hexCellView.Init(hexCell.Stack);
-                    hexCellView.Setup(commandService);
                 }
 
                 hexCellView.Lock(hexCell.LockType, hexCell.LockValue);
