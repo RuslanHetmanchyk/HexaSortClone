@@ -52,7 +52,7 @@ namespace UI.Screens
         {
             base.Show();
 
-            UpdateScore();
+            labelScore.text = $"0 / {configAsset.GetLevel(userService.Level).hexesToBurnGoal}";
 
             levelService.OnScoreChanged += UpdateScore;
             levelService.OnLevelGoalReached += CompleteLevel;
@@ -63,6 +63,7 @@ namespace UI.Screens
             base.Hide();
 
             levelService.OnScoreChanged -= UpdateScore;
+            levelService.OnLevelGoalReached -= CompleteLevel;
         }
 
         private void UpdateScore()

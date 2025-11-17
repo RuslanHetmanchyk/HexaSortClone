@@ -35,6 +35,7 @@ namespace Core.Services.Gameplay.Level.Implementation
 
         public Dictionary<Vector2Int, HexCell> Load()
         {
+            LevelScore = 0;
             Cells = new Dictionary<Vector2Int, HexCell>();
 
             var level = configAsset.GetLevel(userService.Level);
@@ -247,13 +248,16 @@ namespace Core.Services.Gameplay.Level.Implementation
 
         private void IncreaseLevelScore(int value)
         {
-            LevelScore += value;
-            OnScoreChanged?.Invoke();
-
-            if (LevelScore >= LevelGoal)
+            if (LevelScore < LevelGoal)
             {
-                userService.Level = Math.Min(3, userService.Level + 1);
-                OnLevelGoalReached?.Invoke();
+                LevelScore += value;
+                OnScoreChanged?.Invoke();
+                
+                if (LevelScore >= LevelGoal)
+                {
+                    userService.Level = Mathf.Min(userService.Level + 1, 3);
+                    OnLevelGoalReached?.Invoke();
+                }
             }
         }
 
