@@ -123,12 +123,13 @@ namespace Level
             var cellStackView = cellViews[toCell.GridPosition].HexStackView;
             var neighborStackView = cellViews[fromCell.GridPosition].HexStackView;
 
-            var targetHexItemPosition = cellStackView.NextItemPosition();
+            var targetHexItemWorldPosition = cellStackView.NextItemWorldPosition();
 
             var hexItemView = neighborStackView.Pop();
             cellStackView.Push(hexItemView);
 
-            await animator.PlayMoveAnimation(hexItemView.transform, targetHexItemPosition);
+            hexItemView.Animator.PlayMoveAnimation(targetHexItemWorldPosition);
+            await UniTask.Delay(100);
 
             await ProcessMergeHexItemAsync(toCell, fromCell);
         }
@@ -139,9 +140,8 @@ namespace Level
 
             for (var i = 0; i < amount; i++)
             {
-                var stackItem3D = cellViews[gridPosition].HexStackView.Pop();
-
-                animator.DestroyAnimation(stackItem3D.transform);
+                var hexItemView = cellViews[gridPosition].HexStackView.Pop();
+                hexItemView.Animator.DestroyAnimation();
 
                 await UniTask.Delay(100);
             }

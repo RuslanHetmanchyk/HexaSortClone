@@ -205,6 +205,11 @@ namespace Gameplay
             return GetItemPositionByIndex(itemViews.Count);
         }
 
+        public Vector3 NextItemWorldPosition()
+        {
+            return new Vector3(transform.position.x, itemViews.Count * itemPrefab.Height, transform.position.z);
+        }
+
         public Vector3 GetItemPositionByIndex(int index)
         {
             return new Vector3(0, index * itemPrefab.Height, 0);
