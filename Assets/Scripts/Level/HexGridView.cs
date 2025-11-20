@@ -19,9 +19,6 @@ namespace Level
         [Header("Layout")]
         [SerializeField] private float cellSize = 1f;
 
-        [Space(10)]
-        [SerializeField] private HexGridAnimator animator;
-
         private readonly Dictionary<Vector2Int, HexCellView> cellViews = new();
     
         private ICommandExecutionService commandService;

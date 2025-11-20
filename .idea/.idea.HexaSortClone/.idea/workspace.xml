@@ -6,13 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="abfe908f-d091-45b9-bcea-e04c855ef98b" name="Changes" comment="Refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HexaSortClone/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HexaSortClone/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Core/Helpers/HexHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Helpers/HexHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Core/Services/Gameplay/Level/Interfaces/ILevelService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Core/Services/Gameplay/Level/Interfaces/ILevelService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Editor/HexLevelEditorWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/HexLevelEditorWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level/HexGridGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level/HexGridGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level/HexLevel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level/HexLevel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/StartScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Screens/StartScreen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LevelScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LevelScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level/HexGridAnimator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level/HexGridAnimator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Level/HexGridView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Level/HexGridView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,49 +35,16 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Config/ConfigAsset.asset" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Resources/ProjectContext.prefab" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Commands/TryDropStackToHexCellCommand.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Commands/TryDropStackToHexCellCommand.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Implementation/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Interfaces/ILevelService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/Interfaces/ILevelService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/Gameplay/Level/LevelServiceInstaller.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/User/Implementation/UserService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Core/Services/User/Interfaces/IUserService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level01.asset" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Resources/Levels/Level03.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Prefabs/HexGrid/HexItemView.prefab" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scenes/LevelScene.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scenes/LevelScene.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexCell3D.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexCellView.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexCellView.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexItemView.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/HexStackView.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/Stack3D.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Gameplay/StackSpawner.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/HexItemMover.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/HexItemMover.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridGenerator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/LevelService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/StackSpawner.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/StackSpawner.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/UI/Popups/CompleteLevelPopup.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/UI/Screens/GameplayScreen.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridAnimator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridAnimator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridAnimator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Disk D/Projects/HexaSortClone/Assets/Scripts/Level/HexGridView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -140,15 +104,13 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="9420">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="9420" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -168,7 +130,8 @@
       <option name="presentableId" value="Default" />
       <updated>1763134112377</updated>
       <workItem from="1763134117035" duration="6934000" />
-      <workItem from="1763196159911" duration="45060000" />
+      <workItem from="1763196159911" duration="64749000" />
+      <workItem from="1763632975605" duration="8318000" />
     </task>
     <task id="LOCAL-00001" summary="Add recorder">
       <option name="closed" value="true" />
@@ -266,7 +229,111 @@
       <option name="project" value="LOCAL" />
       <updated>1763331048114</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763332763757</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1763332763757</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763336272203</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1763336272203</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763336967369</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1763336967369</updated>
+    </task>
+    <task id="LOCAL-00016" summary=".">
+      <option name="closed" value="true" />
+      <created>1763337087430</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1763337087430</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763337253350</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1763337253350</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Fix drag">
+      <option name="closed" value="true" />
+      <created>1763339785729</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1763339785729</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763340083485</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1763340083485</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763342090722</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1763342090722</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763342422594</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1763342422594</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Refactor">
+      <option name="closed" value="true" />
+      <created>1763345916618</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1763345916618</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763347692346</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1763347692346</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763377355269</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1763377355269</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1763659858597</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1763659858597</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,7 +354,42 @@
     <MESSAGE value="Refactoring Level service" />
     <MESSAGE value="Setup level configs" />
     <MESSAGE value="gitignore" />
+    <MESSAGE value="." />
+    <MESSAGE value="Fix drag" />
+    <MESSAGE value="Refactor" />
     <MESSAGE value="Refactoring" />
     <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Gameplay/HexCellView.cs</url>
+          <line>84</line>
+          <properties documentPath="C:\Disk D\Projects\HexaSortClone\Assets\Scripts\Gameplay\HexCellView.cs" containingFunctionPresentation="Method 'TryToUnlockHexCell'">
+            <startOffsets>
+              <option value="2239" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2312" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Gameplay/HexCellView.cs</url>
+          <line>44</line>
+          <properties documentPath="C:\Disk D\Projects\HexaSortClone\Assets\Scripts\Gameplay\HexCellView.cs" containingFunctionPresentation="Method 'Setup'">
+            <startOffsets>
+              <option value="1294" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1331" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
