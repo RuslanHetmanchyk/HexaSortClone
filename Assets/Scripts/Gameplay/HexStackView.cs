@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Controller;
 using Core.Services.CommandRunner.Interfaces;
 using Core.Services.Gameplay.Commands;
 using Core.Services.Gameplay.Level.Implementation;
 using UnityEngine;
+using Zenject;
 
 namespace Gameplay
 {
@@ -19,12 +21,14 @@ namespace Gameplay
         private Vector3 dragOffset;
 
         private Vector3 startPos = Vector3.zero;
-
-        private HexStack HexStack;
+        private Vector3 currentVelocity = Vector3.zero;
 
         private readonly List<HexItemView> itemViews = new();
 
         private ICommandExecutionService commandService;
+        private HexItemViewPool hexStackViewPool;
+
+        private HexStack HexStack;
 
         void Start()
         {
@@ -39,7 +43,15 @@ namespace Gameplay
             }
         }
 
-        private Vector3 currentVelocity = Vector3.zero;
+        [Inject]
+        private void Install(
+            ICommandExecutionService commandService,
+            HexItemViewPool hexStackViewPool)
+        {
+            this.commandService = commandService;
+            this.hexStackViewPool = hexStackViewPool;
+        }
+
         void HandleDrag()
         {
             // поддержка мыши (Editor/Standalone)
@@ -172,12 +184,10 @@ namespace Gameplay
             transform.position = new Vector3(startPos.x, 5, startPos.z);
         }
 
-
         public void SetStartPos(Vector3 pos)
         {
             startPos = pos;
         }
-
 
         public void Init(HexStack hexStack)
         {
@@ -191,13 +201,11 @@ namespace Gameplay
 
         private void AddItem(HexItem hexItem)
         {
-            var it = Instantiate(itemPrefab, transform);
-            it.ApplyColorById(hexItem.ColorId);
+            var hexItemView = hexStackViewPool.Spawn(hexItem);
+            hexItemView.transform.SetParent(transform, false);
+            hexItemView.transform.localPosition = NextItemPosition();
 
-            // каждый следующий появляется выше предыдущего
-            it.transform.localPosition = NextItemPosition();
-
-            itemViews.Add(it);
+            itemViews.Add(hexItemView);
         }
 
         public Vector3 NextItemPosition()
@@ -244,11 +252,6 @@ namespace Gameplay
         public void SetDraggableActive(bool active)
         {
             collider.enabled = active;
-        }
-
-        public void SetCommandRunner(ICommandExecutionService commandExecutionService)
-        {
-            this.commandService = commandExecutionService;
         }
     }
 }

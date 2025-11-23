@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Controller;
 using Core.Helpers;
-using Core.Services.CommandRunner.Interfaces;
 using Core.Services.Gameplay.Level.Implementation;
 using Core.Services.Gameplay.Level.Interfaces;
 using Cysharp.Threading.Tasks;
@@ -20,9 +20,9 @@ namespace Level
         [SerializeField] private float cellSize = 1f;
 
         private readonly Dictionary<Vector2Int, HexCellView> cellViews = new();
-    
-        private ICommandExecutionService commandService;
+
         private ILevelService levelService;
+        private HexCellViewPool hexCellViewPool;
 
         private void Start()
         {
@@ -41,18 +41,18 @@ namespace Level
 
         [Inject]
         private void Install(
-            ICommandExecutionService commandService,
-            ILevelService levelService)
+            ILevelService levelService,
+            HexCellViewPool hexCellViewPool)
         {
-            this.commandService = commandService;
             this.levelService = levelService;
+            this.hexCellViewPool = hexCellViewPool;
         }
 
         private void Generate(List<HexCell> cells)
         {
-            for (var i = transform.childCount - 1; i >= 0; i--)
+            foreach (var pair in cellViews)
             {
-                DestroyImmediate(transform.GetChild(i).gameObject);
+                hexCellViewPool.Despawn(pair.Value);
             }
 
             cellViews.Clear();
@@ -60,14 +60,10 @@ namespace Level
             foreach (var hexCell in cells)
             {
                 var world = HexHelper.AxialToWorld(hexCell.GridPosition, cellSize);
-                var hexCellView = Instantiate(cellPrefab, world, Quaternion.identity, transform);
-                hexCellView.GridPos = hexCell.GridPosition;
-                hexCellView.Setup(commandService);
 
-                if (hexCell.Stack.Items.Count > 0)
-                {
-                    hexCellView.Init(hexCell.Stack);
-                }
+                var hexCellView = hexCellViewPool.Spawn(hexCell);
+                hexCellView.transform.SetParent(transform, false);
+                hexCellView.transform.SetPositionAndRotation(world, Quaternion.identity);
 
                 hexCellView.Lock(hexCell.LockType, hexCell.LockValue);
 
@@ -77,7 +73,7 @@ namespace Level
 
         private void ProcessMerge(HexCell cell)
         {
-            ProcessMergeAsync(cell);
+            ProcessMergeAsync(cell).Forget();
         }
 
         private async UniTask ProcessMergeAsync(HexCell cell)
