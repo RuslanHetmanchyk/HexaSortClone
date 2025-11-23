@@ -40,7 +40,6 @@ namespace Gameplay
 
             // Опционально: действие по завершении
             moveSequence.OnComplete(() => {
-                Debug.Log($"Движение гекса {gameObject.name} завершено!");
                 tcs.TrySetResult();
             });
 
