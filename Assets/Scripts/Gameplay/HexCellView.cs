@@ -1,25 +1,29 @@
-﻿using Core.Services.CommandRunner.Interfaces;
+﻿using Controller;
+using Core.Services.CommandRunner.Interfaces;
 using Core.Services.Gameplay.Commands;
 using Core.Services.Gameplay.Level.Implementation;
 using UnityEngine;
+using Zenject;
 
 namespace Gameplay
 {
     public class HexCellView : MonoBehaviour
     {
-        [SerializeField] private HexStackView hexStackPrefab;
         [SerializeField] private HexCellLockView lockView;
 
         public bool HasItems => HexStack?.Items?.Count > 0;
 
-        public Vector2Int GridPos { get; set; }
-        public HexStack HexStack { get; private set; }
+        public Vector2Int GridPos => hexCellModel.GridPosition;
+        public HexStack HexStack => hexCellModel.Stack;
         public HexStackView HexStackView { get; private set; }
 
         public LockType LockType { get; private set; }
         public int LockValue { get; private set; }
         
         private ICommandExecutionService commandService;
+        private HexStackViewPool hexStackViewPool;
+
+        private HexCell hexCellModel;
 
         private void OnMouseUpAsButton()
         {
@@ -31,18 +35,25 @@ namespace Gameplay
             TryToUnlockHexCell();
         }
 
-        public void Init(HexCell model)
-        {
-            HexStack = model.Stack;
-            
-            HexStackView = Instantiate(hexStackPrefab, transform);
-            HexStackView.Init(model.Stack);
-            HexStackView.SetDraggableActive(false);
-        }
-
-        public void Setup(ICommandExecutionService commandService)
+        [Inject]
+        private void Install(
+            ICommandExecutionService commandService,
+            HexStackViewPool hexStackViewPool)
         {
             this.commandService = commandService;
+            this.hexStackViewPool = hexStackViewPool;
+        }
+
+        public void Init(HexCell model)
+        {
+            hexCellModel = model;
+            
+            if (hexCellModel.Stack.Items.Count > 0)
+            {
+                HexStackView = hexStackViewPool.Spawn(hexCellModel.Stack);
+                HexStackView.transform.SetParent(transform, false);
+                HexStackView.SetDraggableActive(false);
+            }
         }
 
         public bool CanAcceptStack()
@@ -53,8 +64,8 @@ namespace Gameplay
         public void PlaceStack(HexStackView hexStack)
         {
             HexStackView = hexStack;
-
-            hexStack.transform.position = transform.position;
+            HexStackView.transform.SetParent(transform, false);
+            HexStackView.transform.localPosition = Vector3.zero;
         }
 
         public void Lock(LockType lockType, int lockValue)
