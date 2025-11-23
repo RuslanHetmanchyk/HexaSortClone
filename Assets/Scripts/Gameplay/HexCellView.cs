@@ -31,12 +31,12 @@ namespace Gameplay
             TryToUnlockHexCell();
         }
 
-        public void Init(HexStack stack)
+        public void Init(HexCell model)
         {
-            HexStack = stack;
+            HexStack = model.Stack;
             
             HexStackView = Instantiate(hexStackPrefab, transform);
-            HexStackView.Init(stack);
+            HexStackView.Init(model.Stack);
             HexStackView.SetDraggableActive(false);
         }
 
