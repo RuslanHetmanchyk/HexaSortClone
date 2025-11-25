@@ -25,5 +25,10 @@ namespace Gameplay
                 rend.material.color = ColorHelper.Palette[idx];
             }
         }
+
+        public void OnSpawned()
+        {
+            transform.localScale = Vector3.one;
+        }
     }
 }

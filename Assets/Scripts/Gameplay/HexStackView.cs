@@ -264,7 +264,7 @@ namespace Gameplay
             collider.enabled = active;
         }
 
-        public void Despawn()
+        public void OnDespawned()
         {
             ForceDespawnAllHexItems();
         }

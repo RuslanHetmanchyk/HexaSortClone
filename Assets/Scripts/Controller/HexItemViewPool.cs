@@ -10,5 +10,12 @@ namespace Controller
         {
             view.Init(model);
         }
+
+        protected override void OnSpawned(HexItemView item)
+        {
+            item.OnSpawned();
+
+            base.OnSpawned(item);
+        }
     }
 }

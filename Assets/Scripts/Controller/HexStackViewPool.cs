@@ -10,5 +10,12 @@ namespace Controller
         {
             view.Init(model);
         }
+        
+        protected override void OnDespawned(HexStackView item)
+        {
+            item.OnDespawned();
+            
+            base.OnDespawned(item);
+        }
     }
 }

@@ -62,7 +62,6 @@ namespace Gameplay
             {
                 if (hexStackView.IsDraggable)
                 {
-                    hexStackView.ForceDespawnAllTopHexItems();
                     hexStackViewPool.Despawn(hexStackView);
                 }
             }
