@@ -4,6 +4,7 @@ using Controller;
 using Core.Services.CommandRunner.Interfaces;
 using Core.Services.Gameplay.Commands;
 using Core.Services.Gameplay.Level.Implementation;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -26,7 +27,7 @@ namespace Gameplay
         private readonly List<HexItemView> itemViews = new();
 
         private ICommandExecutionService commandService;
-        private HexItemViewPool hexStackViewPool;
+        private HexItemViewPool hexItemViewPool;
 
         private HexStack HexStack;
 
@@ -46,10 +47,10 @@ namespace Gameplay
         [Inject]
         private void Install(
             ICommandExecutionService commandService,
-            HexItemViewPool hexStackViewPool)
+            HexItemViewPool hexItemViewPool)
         {
             this.commandService = commandService;
-            this.hexStackViewPool = hexStackViewPool;
+            this.hexItemViewPool = hexItemViewPool;
         }
 
         void HandleDrag()
@@ -201,7 +202,7 @@ namespace Gameplay
 
         private void AddItem(HexItem hexItem)
         {
-            var hexItemView = hexStackViewPool.Spawn(hexItem);
+            var hexItemView = hexItemViewPool.Spawn(hexItem);
             hexItemView.transform.SetParent(transform, false);
             hexItemView.transform.localPosition = NextItemPosition();
 
@@ -247,11 +248,39 @@ namespace Gameplay
             hexItemView.transform.SetParent(transform);
         }
 
+        public async UniTask DestroyTopHexItemAsync()
+        {
+            var topHexItem = Pop();
+
+            await topHexItem.Animator.DestroyAnimation();
+
+            hexItemViewPool.Despawn(topHexItem);
+        }
+
         public bool IsDraggable => collider.enabled;
 
         public void SetDraggableActive(bool active)
         {
             collider.enabled = active;
+        }
+
+        public void Despawn()
+        {
+            ForceDespawnAllHexItems();
+        }
+
+        // Рекурсивный деспаун всех HexItemView из стека
+        private void ForceDespawnAllHexItems()
+        {
+            if (itemViews.Count == 0)
+            {
+                return;
+            }
+
+            var topHexItem = Pop();
+            hexItemViewPool.Despawn(topHexItem);
+
+            ForceDespawnAllHexItems();
         }
     }
 }
