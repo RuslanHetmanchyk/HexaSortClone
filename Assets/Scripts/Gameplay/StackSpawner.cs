@@ -39,7 +39,7 @@ namespace Gameplay
 
         private void Spawn()
         {
-            Clear();
+            Despawn();
 
             for (var i = 0; i < levelService.GeneratedStacks.Count; i++)
             {
@@ -56,13 +56,14 @@ namespace Gameplay
             }
         }
 
-        private void Clear()
+        private void Despawn()
         {
-            foreach (var item in stacks)
+            foreach (var hexStackView in stacks)
             {
-                if (item.IsDraggable)
+                if (hexStackView.IsDraggable)
                 {
-                    hexStackViewPool.Despawn(item);
+                    hexStackView.ForceDespawnAllTopHexItems();
+                    hexStackViewPool.Despawn(hexStackView);
                 }
             }
 
