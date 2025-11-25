@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -113,39 +114,45 @@ namespace Gameplay
                 .SetId("JumpTravelTween");
         }
 
-        public void DestroyAnimation()
+        public async UniTask DestroyAnimation(Action onComplete = null)
         {
+            var tcs = new UniTaskCompletionSource();
+
             float scaleDuration = 0.25f;
             float jumpHeight = 0.5f; // Насколько высоко подлетит объект по Y
             float jumpDuration = scaleDuration * 0.5f; // Длительность подскока (половина от общей длительности)
 
             // Создаем последовательность (Sequence) для комбинирования анимаций
-            // Sequence позволяет вам объединять и упорядочивать Tween-ы
             Sequence mySequence = DOTween.Sequence();
 
             // 1. Анимация масштабирования до нуля
-            Tween scaleTween = transform.DOScale(Vector3.zero, scaleDuration)
+            Tween scaleTween = transform
+                .DOScale(Vector3.zero, scaleDuration)
                 .SetEase(Ease.InQuad);
 
-            // 2. Анимация подъема по Y
-            // Здесь мы используем .DOJump() для более естественного подскока,
-            // но можно и .DOMoveY() для простого подъема.
-            // DOJump(endValue, jumpPower, numJumps, duration)
-            // Мы хотим, чтобы он просто поднялся, поэтому numJumps = 1
-            Tween jumpTween = transform.DOJump(
+            // 2. Анимация прыжка по Y
+            Tween jumpTween = transform
+                .DOJump(
                     transform.position + Vector3.up * jumpHeight, // Конечная позиция (текущая + подъем)
                     jumpHeight, // Мощность прыжка (сколько от начальной точки)
                     1, // Количество прыжков
-                    jumpDuration // Длительность прыжка
-                )
+                    jumpDuration) // Длительность прыжка
                 .SetEase(Ease.OutSine); // Плавный подъем и быстрое падение
 
-            // Добавляем Tween-ы в последовательность:
-            // .Join(tween) запускает этот Tween параллельно с предыдущим
-            mySequence.Append(scaleTween) // Сначала добавляем уменьшение
-                .Join(jumpTween); // Запускаем подскок одновременно с уменьшением
-        
-            mySequence.OnComplete(() => Destroy(transform.gameObject));
+            // Добавляем Tween-ы в последовательность
+            mySequence
+                .Append(scaleTween) // Сначала добавляем уменьшение
+                .Join(jumpTween) // Запускаем подскок одновременно с уменьшением
+                .OnComplete(() =>
+                {
+                    onComplete?.Invoke();
+                    tcs.TrySetResult();
+                });
+
+            // Запускаем последовательность
+            mySequence.Play();
+
+            await tcs.Task;
         }
     }
 }
